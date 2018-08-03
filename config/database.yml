@@ -1,0 +1,18 @@
+
+development:
+  adapter:  postgresql
+  encoding: unicode
+  pool:     5
+  host:     localhost
+  database: damaten-test
+  username: pg
+  password: 7213
+
+production:
+  adapter:  postgresql
+  encoding: unicode
+  pool:     5
+  host:     postgresql5.locum.ru
+  database: hater_damaten88
+  username: hater_damaten88
+  password: DxsgQmPJtFl
