@@ -21,6 +21,9 @@ set :repo_url,       "#{fetch(:user)}@cobalt.locum.ru:" \
 
 # hosting_hater@cobalt.locum.ru:git/damaten.git eA0zsEoOeWC
 
+#append :linked_files, "config/secrets.yml.key"
+#append :linked_files, %w{config/master.key}
+
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
@@ -32,7 +35,7 @@ set :pty, true
 set :log_level, :info
 
 # Default value for :linked_files is []
-# set :linked_files, %w{config/database.yml}
+ set :linked_files, %w{config/master.key}
 
 # Default value for linked_dirs is []
 set :linked_dirs, %w(log tmp/cache tmp/pids vendor/bundle public/system)
