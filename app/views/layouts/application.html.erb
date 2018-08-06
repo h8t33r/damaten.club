@@ -1,15 +1,44 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Damaten</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-21822408-6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-21822408-6');
+    </script>
+
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+
+    <title>Damaten Ivanovo</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="materialize.min.css"  media="screen,projection"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
 
   <body>
-    <%= yield %>
+    <nav>
+      <div class="nav-wrapper cyan darken-4">
+        <a href="#" class="brand-logo">Damaten Ivanovo</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down ">
+          <li><a href="">Главная</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div style="text-align: center;">
+      <img src="ivanovo_damaten_a.png">
+      <%= yield %>
+    </div>
+    <script type="text/javascript" src="materialize.min.js"></script>
   </body>
 </html>
