@@ -1,0 +1,81 @@
+<%= form_with(model: game, local: true) do |form| %>
+  <% if game.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(game.errors.count, "error") %> prohibited this game from being saved:</h2>
+
+      <ul>
+      <% game.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+<table>
+  <tr>
+    <td>
+      <div class="input-field col s6">
+        <input name="game[score][east][player_id]" id="east_player" type="text" class="validate">
+        <label for="east_player">East</label>
+      </div>    
+    </td>
+    <td>
+      <div class="input-field col s6">
+        <input name="game[score][east][score]" id="east_player_score" type="number" class="validate">
+        <label for="east_player_score">Score</label>
+      </div>      
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="input-field col s6">
+        <input name="game[score][sauce][player_id]" id="sauce_player" type="text" class="validate">
+        <label for="sauce_player">Sauce</label>
+      </div>    
+    </td>
+    <td>
+      <div class="input-field col s6">
+        <input name="game[score][sauce][score]" id="sauce_player_score" type="number" class="validate">
+        <label for="sauce_player_score">Score</label>
+      </div>      
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="input-field col s6">
+        <input name="game[score][west][player_id]" id="west_player" type="text" class="validate">
+        <label for="west_player">West</label>
+      </div>    
+    </td>
+    <td>
+      <div class="input-field col s6">
+        <input name="game[score][west][score]" id="west_player_score" type="number" class="validate">
+        <label for="west_player_score">Score</label>
+      </div>      
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="input-field col s6">
+        <input name="game[score][north][player_id]" id="north_player" type="text" class="validate">
+        <label for="north_player">North</label>
+      </div>    
+    </td>
+    <td>
+      <div class="input-field col s6">
+        <input name="game[score][north][score]" id="north_player_score" type="number" class="validate">
+        <label for="north_player_score">Score</label>
+      </div>      
+    </td>
+  </tr>
+</table>
+
+
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

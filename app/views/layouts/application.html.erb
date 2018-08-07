@@ -6,39 +6,38 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'UA-21822408-6');
     </script>
 
     <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href="favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <title>Damaten Ivanovo</title>
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="materialize.min.css"  media="screen,projection"/>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="/materialize.min.css" type="text/css" media="screen,projection" />
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
 
   <body>
     <nav>
-      <div class="nav-wrapper cyan darken-4">
-        <a href="#" class="brand-logo">Damaten Ivanovo</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down ">
-          <li><a href="">Главная</a></li>
+      <div class="nav-wrapper light-blue darken-4">
+        <ul id="nav-mobile" class="left hide-on-med-and-down ">
+          <li><a href="/">Главная</a></li>
+          <li><a href="/players">Игроки</a></li>
+          <li><a href="/games">Результаты</a></li>
         </ul>
       </div>
     </nav>
-    <div style="text-align: center;">
-      <img src="ivanovo_damaten_a.png">
+    <div class="container">
       <%= yield %>
     </div>
-    <script type="text/javascript" src="materialize.min.js"></script>
+    <script type="text/javascript" src="/materialize.min.js"></script>
   </body>
 </html>

@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+<%= @players.find(1).name %>
+<table>
+  <thead>
+    <tr>
+      <th>Дата</th>
+      <th>Восток</th>
+      <th></th>
+      <th>Юг</th>
+      <th></th>
+      <th>Запад</th>
+      <th></th>
+      <th>Север</th>
+      <th></th>
+      <th>Управление</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @games.each do |game| %>
+      <tr>
+        <td><%= game.created_at.strftime("%Y.%m.%d") %></td>
+        <td><%= @players.find(game.score["east"]["player_id"]).name %></td>
+        <td><%= game.score["east"]["score"] %></td>
+        <td><%= @players.find(game.score["sauce"]["player_id"]).name %></td>
+        <td><%= game.score["sauce"]["score"] %></td>
+        <td><%= @players.find(game.score["west"]["player_id"]).name %></td>
+        <td><%= game.score["west"]["score"] %></td>
+        <td><%= @players.find(game.score["north"]["player_id"]).name %></td>
+        <td><%= game.score["north"]["score"] %></td>
+        <td>
+          <%= link_to 'S', game %> |
+          <%= link_to 'E', edit_game_path(game) %> |
+          <%= link_to 'D', game, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Добавить результат игры', new_game_path %>
