@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   get 'welcome/index'
   get 'csv' => 'games#csv_import'
 
-  root 'welcome#index'
+  root 'games#index'
+  #root 'welcome#index'
 end

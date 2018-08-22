@@ -40,8 +40,8 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
-    @players = Player.all
+    @games = Game.order(created_at: :desc)
+    @players = Player.select(:name)
   end
 
   # GET /games/1
@@ -49,14 +49,13 @@ class GamesController < ApplicationController
   def show
   end
 
-  # GET /games/new
   def new
-    @players = Player.all
+    @players = Player.select(:id, :name).where(activated: true)
     @game = Game.new
   end
 
-  # GET /games/1/edit
   def edit
+    @players = Player.select(:id, :name).where(activated: true)
   end
 
   # POST /games

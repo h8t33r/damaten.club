@@ -1,39 +1,33 @@
 <p id="notice"><%= notice %></p>
 <a class="waves-effect waves-light btn" href="/games/new">Добавить результат игры</a>
+
 <table class="striped result">
   <thead>
     <tr>
-      <th>Дата</th>
-      <th>Восток</th>
       <th></th>
-      <th>Юг</th>
-      <th></th>
-      <th>Запад</th>
-      <th></th>
-      <th>Север</th>
-      <th></th>
-      <th>Управление</th>
+      <th colspan="2">Восток</th>
+      <th colspan="2">Юг</th>
+      <th colspan="2">Запад</th>
+      <th colspan="2">Север</th>
     </tr>
   </thead>
-
   <tbody>
-    <% @games.each do |game| %>
-      <tr>
-        <td><%= game.created_at.strftime("%Y.%m.%d") %></td>
-        <td><%= @players.find(game.score["east"]["player_id"]).name %></td>
-        <td><%= game.score["east"]["score"] %></td>
-        <td><%= @players.find(game.score["south"]["player_id"]).name %></td>
-        <td><%= game.score["south"]["score"] %></td>
-        <td><%= @players.find(game.score["west"]["player_id"]).name %></td>
-        <td><%= game.score["west"]["score"] %></td>
-        <td><%= @players.find(game.score["north"]["player_id"]).name %></td>
-        <td><%= game.score["north"]["score"] %></td>
-        <td>
-          <%= link_to 'S', game %> |
-          <%= link_to 'E', edit_game_path(game) %> |
-          <%= link_to 'D', game, method: :delete, data: { confirm: 'Are you sure?' } %>
-        </td>
-      </tr>
-    <% end %>
+  <% @games.each do |game| %>
+    <tr>
+      <td><%= link_to game.created_at.strftime("%Y.%m.%d"), game %></td>
+
+      <td><%= @players.find(game.score["east"]["player_id"]).name %></td>
+      <td><%= game.score["east"]["score"] %></td>
+
+      <td><%= @players.find(game.score["south"]["player_id"]).name %></td>
+      <td><%= game.score["south"]["score"] %></td>
+
+      <td><%= @players.find(game.score["west"]["player_id"]).name %></td>
+      <td><%= game.score["west"]["score"] %></td>
+      
+      <td><%= @players.find(game.score["north"]["player_id"]).name %></td>
+      <td><%= game.score["north"]["score"] %></td>
+    </tr>
+  <% end %>
   </tbody>
 </table>

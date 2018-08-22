@@ -1,4 +1,5 @@
 class Game < ApplicationRecord
+
   before_save :convert_to_json
 
   private

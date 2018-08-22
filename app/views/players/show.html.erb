@@ -1,19 +1,15 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @player.name %>
+  <h3>
+    <%= if @player.activated == true then "✔" else "✖" end %>
+    <%= @player.name %> 
+  </h3>
+  <b>Ник:</b>
+  <%= if @player.nickname != nil then @player.nickname else "не указан" end %>
 </p>
-
 <p>
-  <strong>Nickname:</strong>
-  <%= @player.nickname %>
+  game data
 </p>
-
-<p>
-  <strong>Activated:</strong>
-  <%= @player.activated %>
-</p>
-
 <%= link_to 'Edit', edit_player_path(@player) %> |
 <%= link_to 'Back', players_path %>
