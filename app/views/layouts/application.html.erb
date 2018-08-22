@@ -2,11 +2,19 @@
 <html>
   <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-21822408-6"></script>
+    <script type="text/javascript" src="/materialize.min.js"></script>
     <script>
+      // Google Analytics
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'UA-21822408-6');
+
+      // Materialize functions
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems, options);
+      });
     </script>
 
     <meta charset="utf-8" />
@@ -21,23 +29,25 @@
     <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link rel="stylesheet" href="/materialize.min.css" type="text/css" media="screen,projection" />
-    <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/default.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata" type="text/css">
 
   </head>
 
   <body>
     <nav>
       <div class="nav-wrapper light-blue darken-4">
-        <ul id="nav-mobile" class="left hide-on-med-and-down ">
+        <ul id="nav-mobile" class="left">
           <li><a href="/">Главная</a></li>
           <li><a href="/players">Игроки</a></li>
           <li><a href="/games">Результаты</a></li>
+          <!-- 
+          <li><a href="/csv">t:CSV</a></li>-->
         </ul>
       </div>
     </nav>
     <div class="container">
       <%= yield %>
     </div>
-    <script type="text/javascript" src="/materialize.min.js"></script>
   </body>
 </html>

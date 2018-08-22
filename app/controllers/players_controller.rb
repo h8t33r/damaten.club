@@ -28,7 +28,7 @@ class PlayersController < ApplicationController
 
     respond_to do |format|
       if @player.save
-        format.html { redirect_to @player, notice: 'Player was successfully created.' }
+        format.html { redirect_to @player, notice: 'Игрок создан.' }
         format.json { render :show, status: :created, location: @player }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class PlayersController < ApplicationController
   def update
     respond_to do |format|
       if @player.update(player_params)
-        format.html { redirect_to @player, notice: 'Player was successfully updated.' }
+        format.html { redirect_to @player, notice: 'Данные игрока благополучно изменены.' }
         format.json { render :show, status: :ok, location: @player }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class PlayersController < ApplicationController
   def destroy
     @player.destroy
     respond_to do |format|
-      format.html { redirect_to players_url, notice: 'Player was successfully destroyed.' }
+      format.html { redirect_to players_url, notice: 'Игрок удален из базы, это ОЧЕНЬ плохо.' }
       format.json { head :no_content }
     end
   end

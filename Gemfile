@@ -11,7 +11,10 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'pg', '~> 0.18.4' # locum postgresql 9.4
+
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'materialize-sass', '~> 1.0.0.rc2'
+#gem 'jquery-rails', '~> 4.3'
 
 gem 'unicorn', '~> 5.1.0'
 

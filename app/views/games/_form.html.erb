@@ -12,61 +12,68 @@
   <% end %>
 
 
-
-<table>
+<table class="table_without_borders">
   <tr>
     <td>
-      <div class="input-field col s6">
-        <input name="game[score][east][player_id]" id="east_player" type="text" class="validate">
-        <label for="east_player">East</label>
-      </div>    
+      <select class="browser-default" name="game[score][east][player_id]">
+        <option value="" disabled selected>Восток</option>
+        <% @players.each do |player| %>
+          <option value="<%= player.id %>"><%= player.name %></option>
+        <% end %>
+      </select>
     </td>
     <td>
       <div class="input-field col s6">
         <input name="game[score][east][score]" id="east_player_score" type="number" class="validate">
-        <label for="east_player_score">Score</label>
+        <label for="east_player_score">Результат</label>
       </div>      
     </td>
   </tr>
   <tr>
     <td>
-      <div class="input-field col s6">
-        <input name="game[score][sauce][player_id]" id="sauce_player" type="text" class="validate">
-        <label for="sauce_player">Sauce</label>
-      </div>    
+      <select class="browser-default" name="game[score][south][player_id]">
+        <option value="" disabled selected>Юг</option>
+        <% @players.each do |player| %>
+          <option value="<%= player.id %>"><%= player.name %></option>
+        <% end %>
+      </select>
     </td>
     <td>
       <div class="input-field col s6">
-        <input name="game[score][sauce][score]" id="sauce_player_score" type="number" class="validate">
-        <label for="sauce_player_score">Score</label>
+        <input name="game[score][south][score]" id="sauce_player_score" type="number" class="validate">
+        <label for="sauce_player_score">Результат</label>
       </div>      
     </td>
   </tr>
   <tr>
     <td>
-      <div class="input-field col s6">
-        <input name="game[score][west][player_id]" id="west_player" type="text" class="validate">
-        <label for="west_player">West</label>
-      </div>    
+      <select class="browser-default" name="game[score][west][player_id]">
+        <option value="" disabled selected>Запад</option>
+        <% @players.each do |player| %>
+          <option value="<%= player.id %>"><%= player.name %></option>
+        <% end %>
+      </select>
     </td>
     <td>
       <div class="input-field col s6">
         <input name="game[score][west][score]" id="west_player_score" type="number" class="validate">
-        <label for="west_player_score">Score</label>
+        <label for="west_player_score">Результат</label>
       </div>      
     </td>
   </tr>
   <tr>
     <td>
-      <div class="input-field col s6">
-        <input name="game[score][north][player_id]" id="north_player" type="text" class="validate">
-        <label for="north_player">North</label>
-      </div>    
+      <select class="browser-default" name="game[score][north][player_id]">
+        <option value="" disabled selected>Север</option>
+        <% @players.each do |player| %>
+          <option value="<%= player.id %>"><%= player.name %></option>
+        <% end %>
+      </select>
     </td>
     <td>
       <div class="input-field col s6">
         <input name="game[score][north][score]" id="north_player_score" type="number" class="validate">
-        <label for="north_player_score">Score</label>
+        <label for="north_player_score">Результат</label>
       </div>      
     </td>
   </tr>
@@ -74,8 +81,8 @@
 
 
 
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions" style="padding-top: 20px;">
+    <%= form.submit "Продолжить", :class => "btn waves-effect waves-light" %>
   </div>
+
 <% end %>

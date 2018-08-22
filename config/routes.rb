@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :players
   
   get 'welcome/index'
+  get 'csv' => 'games#csv_import'
 
   root 'welcome#index'
 end

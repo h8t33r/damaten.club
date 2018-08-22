@@ -1,27 +1,23 @@
 <p id="notice"><%= notice %></p>
-<table>
+<a class="waves-effect waves-light btn" href="/players/new">Добавить игрока</a>
+<table class="striped result">
   <thead>
     <tr>
       <th>Фамилия Имя</th>
       <th>Ник</th>
       <th>Активирован?</th>
-      <th colspan="2"></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @players.each do |player| %>
       <tr>
-        <td><%= player.name %></td>
+        <td><%= link_to player.name, player %></td>
         <td><%= player.nickname %></td>
         <td><%= if player.activated == true then "Да" else "Нет" end %></td>
-        <td><%= link_to 'Детализация', player %></td>
         <td><%= link_to 'Редактировать', edit_player_path(player) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'Добавить пользователя', new_player_path %>

@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
-<%= @players.find(1).name %>
-<table>
+<a class="waves-effect waves-light btn" href="/games/new">Добавить результат игры</a>
+<table class="striped result">
   <thead>
     <tr>
       <th>Дата</th>
@@ -22,8 +22,8 @@
         <td><%= game.created_at.strftime("%Y.%m.%d") %></td>
         <td><%= @players.find(game.score["east"]["player_id"]).name %></td>
         <td><%= game.score["east"]["score"] %></td>
-        <td><%= @players.find(game.score["sauce"]["player_id"]).name %></td>
-        <td><%= game.score["sauce"]["score"] %></td>
+        <td><%= @players.find(game.score["south"]["player_id"]).name %></td>
+        <td><%= game.score["south"]["score"] %></td>
         <td><%= @players.find(game.score["west"]["player_id"]).name %></td>
         <td><%= game.score["west"]["score"] %></td>
         <td><%= @players.find(game.score["north"]["player_id"]).name %></td>
@@ -37,7 +37,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'Добавить результат игры', new_game_path %>
