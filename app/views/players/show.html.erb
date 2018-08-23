@@ -6,7 +6,7 @@
     <%= @player.name %> 
   </h3>
   <b>Ник:</b>
-  <%= if @player.nickname != nil then @player.nickname else "не указан" end %>
+  <%= if @player.nickname != "" then @player.nickname else "не указан" end %>
 </p>
 <p>
   game data

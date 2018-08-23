@@ -5,36 +5,37 @@ class GamesController < ApplicationController
 
   def csv_import
 
-    player = Player.all
-
     game_data = Hash.new
-    CSV.foreach("public/2018_games.csv", { encoding: "UTF-8", headers: true, header_converters: :symbol, converters: :all}) do |row|
+    CSV.foreach("public/RAW_all_games.csv", { encoding: "UTF-8", headers: true, header_converters: :symbol, converters: :all}) do |row|
       hashed_row = row.to_h
 
-      # ["updated_at", "2018-08-11 07:52:38.977253"]
       game_data[:created_at] = hashed_row[:created_at].to_date
 
       game_data[:score] = {}
       game_data[:score][:east] = {}
-      game_data[:score][:east][:player_id] = 1#hashed_row[:player_east]
+      game_data[:score][:east][:player_id] = hashed_row[:player_east]
       game_data[:score][:east][:score] = hashed_row[:player_east_score]
 
-      game_data[:score][:sauth] = {}
-      game_data[:score][:sauth][:player_id] = 2#hashed_row[:player_south]
-      game_data[:score][:sauth][:score] = hashed_row[:player_south_score]
+      game_data[:score][:south] = {}
+      game_data[:score][:south][:player_id] = hashed_row[:player_south]
+      game_data[:score][:south][:score] = hashed_row[:player_south_score]
 
       game_data[:score][:west] = {}
-      game_data[:score][:west][:player_id] = 3#hashed_row[:player_west]
+      game_data[:score][:west][:player_id] = hashed_row[:player_west]
       game_data[:score][:west][:score] = hashed_row[:player_west_score]
 
       game_data[:score][:north] = {}
-      game_data[:score][:north][:player_id] = 4#hashed_row[:player_north]
+      game_data[:score][:north][:player_id] = hashed_row[:player_north]
       game_data[:score][:north][:score] = hashed_row[:player_north_score]
 
+      game = Game.new
+      game.created_at = game_data[:created_at]
+      game.score = game_data[:score]
+      game.save
+
     end
-    #g = game.new
-    #g.save
-    render json: game_data
+
+    render html: "all games/data serialized and saved"
   end
 
   # GET /games
