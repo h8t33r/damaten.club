@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   resources :players
   
   get 'welcome' => 'welcome#index'
-  get 'csv_import' => 'games#csv_import'
+
+  get 'api/about'
+  get 'api/players'
+  get 'api/games'
+  get 'api/csv' => 'games#csv_import'
 
   root 'games#index'
   #root 'welcome#index'

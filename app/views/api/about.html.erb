@@ -1,0 +1,26 @@
+<h3>About API</h3>
+<p>
+  Список игроков в формате JSON: <a href="/api/players.json">Players</a>
+  <br>
+  <b>Например:</b><br>
+  <code>{"id":17,"name":"Хлебов Воробушек"},</code>
+</p>
+<p>
+  Список сыгранных игр в формате JSON: <a href="/api/games.json">Games</a>
+  <br>
+  <b>Например:</b>
+  <br>
+  <code>
+    {<br>
+    &nbsp;&nbsp;"id":42,<br>
+    &nbsp;&nbsp;"score":<br>
+    &nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"east":{"player_id":4,"player_score":23100},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"south":{"player_id":2,"player_score":22700},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"west":{"player_id":3,"player_score":21500},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"north":{"player_id":1,"player_score":32700}<br>
+    &nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;"created_at":"2015-11-16T00:00:00.000Z"<br>
+  },
+  </code>
+</p>
