@@ -13,7 +13,7 @@
 
 <div class="row">
   <div class="col s6">
-    <select class="browser-default" name="game[score][east][player_id]">
+    <select class="browser-default" name="game[score][east][player_id]" required>
       <option value="" disabled selected>Восток</option>
       <% @players.each do |player| %>
       <option value="<%= player.id %>"><%= player.name %></option>
@@ -21,13 +21,13 @@
     </select>
   </div>
   <div class=" col s6">
-    <input name="game[score][east][player_score]" id="east_player_score" type="number" class="validate" onchange="result_sum();">
+    <input name="game[score][east][player_score]" id="east_player_score" type="number" class="validate" onchange="result_sum();" required />
   </div>
 </div>
 
 <div class="row">
   <div class="col s6">
-    <select class="browser-default" name="game[score][south][player_id]">
+    <select class="browser-default" name="game[score][south][player_id]" required>
       <option value="" disabled selected>Юг</option>
       <% @players.each do |player| %>
       <option value="<%= player.id %>"><%= player.name %></option>
@@ -35,13 +35,13 @@
     </select>
   </div>
   <div class="col s6">
-    <input name="game[score][south][player_score]" id="south_player_score" type="number" class="validate" onchange="result_sum();">
+    <input name="game[score][south][player_score]" id="south_player_score" type="number" class="validate" onchange="result_sum();" required />
   </div> 
 </div>
 
 <div class="row">
   <div class="col s6">
-    <select class="browser-default" name="game[score][west][player_id]">
+    <select class="browser-default" name="game[score][west][player_id]" required>
       <option value="" disabled selected>Запад</option>
       <% @players.each do |player| %>
       <option value="<%= player.id %>"><%= player.name %></option>
@@ -49,12 +49,12 @@
     </select>
   </div>
   <div class="col s6">
-    <input name="game[score][west][player_score]" id="west_player_score" type="number" class="validate" onchange="result_sum();">
+    <input name="game[score][west][player_score]" id="west_player_score" type="number" class="validate" onchange="result_sum();" required />
   </div>  
 </div>
 <div class="row">
   <div class="col s6">
-    <select class="browser-default" name="game[score][north][player_id]">
+    <select class="browser-default" name="game[score][north][player_id]" required>
       <option value="" disabled selected>Север</option>
       <% @players.each do |player| %>
       <option value="<%= player.id %>"><%= player.name %></option>
@@ -62,7 +62,7 @@
     </select>
   </div>
   <div class="col s6">
-    <input name="game[score][north][player_score]" id="north_player_score" type="number" class="validate" onchange="result_sum();">
+    <input name="game[score][north][player_score]" id="north_player_score" type="number" class="validate" onchange="result_sum();" required />
   </div>  
 </div>
 <div class="row">

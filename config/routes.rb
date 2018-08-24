@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'api/about'
   get 'api/players'
   get 'api/games'
-  get 'api/csv' => 'games#csv_import'
+  #get 'api/csv' => 'api#csv_import'
 
   root 'games#index'
   #root 'welcome#index'

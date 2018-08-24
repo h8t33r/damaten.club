@@ -4,3 +4,14 @@ body, table, div, td, th {font-family: 'Roboto Condensed', sans-serif;}
 .result tr td {border: 1px solid #EEE;}
 
 .table_without_borders {border: none}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+    

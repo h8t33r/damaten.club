@@ -1,5 +1,16 @@
 <p id="notice"><%= notice %></p>
-<a class="waves-effect waves-light btn" href="/games/new">Добавить результат игры</a>
+
+<div class="row">
+  <div class="col s4">
+    <a class="waves-effect waves-light btn" href="/games/new">Добавить результат</a>
+  </div>
+  <!--<div class="col s8">
+    <a class="waves-effect waves-light btn">2015</a>
+    <a class="waves-effect waves-light btn">2016</a>
+    <a class="waves-effect waves-light btn">2017</a>
+    <a class="waves-effect waves-light btn">2018</a>
+  </div>-->
+</div>
 
 <table class="striped result">
   <thead>
@@ -13,21 +24,47 @@
     </tr>
   </thead>
   <tbody>
-  <% @games.each do |game| %>
+  <% @games.each do |game| 
+
+  score = [
+    game.score["east"]["player_score"],
+    game.score["south"]["player_score"],
+    game.score["west"]["player_score"],
+    game.score["north"]["player_score"]
+  ]
+
+
+  %>
     <tr>
       <td><%= link_to game.created_at.strftime("%Y.%m.%d"), game %></td>
 
-      <td><%= @players.find(game.score["east"]["player_id"]).name %></td>
+      <td><%= if (score.max == game.score["east"]["player_score"])
+                then "👑 " + @players.find(game.score["east"]["player_id"]).name
+                else @players.find(game.score["east"]["player_id"]).name
+              end
+      %></td>
       <td><%= game.score["east"]["player_score"] %></td>
 
-      <td><%= @players.find(game.score["south"]["player_id"]).name %></td>
+      <td><%= if (score.max == game.score["south"]["player_score"])
+                then "👑 " + @players.find(game.score["south"]["player_id"]).name
+                else @players.find(game.score["south"]["player_id"]).name
+              end
+      %></td>
       <td><%= game.score["south"]["player_score"] %></td>
 
-      <td><%= @players.find(game.score["west"]["player_id"]).name %></td>
+      <td><%= if (score.max == game.score["west"]["player_score"])
+                then "👑 " + @players.find(game.score["west"]["player_id"]).name
+                else @players.find(game.score["west"]["player_id"]).name
+              end
+      %></td>
       <td><%= game.score["west"]["player_score"] %></td>
       
-      <td><%= @players.find(game.score["north"]["player_id"]).name %></td>
-      <td><%= game.score["north"]["player_score"] %></td>
+      <td><%= if (score.max == game.score["north"]["player_score"])
+                then "👑 " + @players.find(game.score["north"]["player_id"]).name
+                else @players.find(game.score["north"]["player_id"]).name
+              end
+      %></td>
+      <td><%= game.score["north"]["player_score"]%></td>
 
       <td style="text-align: right;"><%=
         game.score["east"]["player_score"].to_i +
