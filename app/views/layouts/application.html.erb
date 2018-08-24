@@ -15,9 +15,26 @@
       //  var elems = document.querySelectorAll('select');
       //  var instances = M.FormSelect.init(elems, options);
       //});
-      $(".dropdown-trigger").dropdown();
-    </script>
 
+      function result_sum() {
+
+        var r_sum = 0;
+
+        var r_east   = parseInt(document.getElementById('east_player_score').value);
+        var r_south  = parseInt(document.getElementById('south_player_score').value);
+        var r_west   = parseInt(document.getElementById('west_player_score').value);
+        var r_north  = parseInt(document.getElementById('north_player_score').value);
+
+        if (isNaN(r_east) == true) r_east = 0;
+        if (isNaN(r_south) == true) r_south = 0;
+        if (isNaN(r_west) == true) r_west = 0;
+        if (isNaN(r_north) == true) r_north = 0;
+
+        var r_sum = r_east + r_south + r_west + r_north;
+
+        document.getElementById('result_SUM').innerHTML = r_sum;
+      }
+    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 

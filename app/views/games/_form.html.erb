@@ -21,7 +21,7 @@
     </select>
   </div>
   <div class=" col s6">
-    <input name="game[score][east][player_score]" id="east_player_score" type="number" class="validate">
+    <input name="game[score][east][player_score]" id="east_player_score" type="number" class="validate" onchange="result_sum();">
   </div>
 </div>
 
@@ -35,7 +35,7 @@
     </select>
   </div>
   <div class="col s6">
-    <input name="game[score][south][player_score]" id="sauce_player_score" type="number" class="validate">
+    <input name="game[score][south][player_score]" id="south_player_score" type="number" class="validate" onchange="result_sum();">
   </div> 
 </div>
 
@@ -49,7 +49,7 @@
     </select>
   </div>
   <div class="col s6">
-    <input name="game[score][west][player_score]" id="west_player_score" type="number" class="validate">
+    <input name="game[score][west][player_score]" id="west_player_score" type="number" class="validate" onchange="result_sum();">
   </div>  
 </div>
 <div class="row">
@@ -62,12 +62,15 @@
     </select>
   </div>
   <div class="col s6">
-    <input name="game[score][north][player_score]" id="north_player_score" type="number" class="validate">
+    <input name="game[score][north][player_score]" id="north_player_score" type="number" class="validate" onchange="result_sum();">
   </div>  
 </div>
-
-<div class="actions" style="padding-top: 20px;">
-  <%= form.submit "Продолжить", :class => "btn waves-effect waves-light" %>
+<div class="row">
+  <div class="actions col s6">
+    <%= form.submit "Продолжить", :class => "btn waves-effect waves-light" %>
+  </div>
+  <div class="col s6" id="result_SUM" style="font-size: 22pt;">
+  </div>
 </div>
 
 <% end %>
