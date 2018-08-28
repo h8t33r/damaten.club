@@ -8,8 +8,16 @@ class PlayersController < ApplicationController
   end
 
   # GET /players/1
-  # GET /players/1.json
+  # GET /players/1.json GOVNOCODE
   def show
+    @players = Player.select(:id, :name)
+    @games = Game.find_by_sql ["SELECT id, score, created_at
+      FROM public.games
+      WHERE score #>> '{east, player_id}' = '?'
+      OR score #>> '{south, player_id}' = '?'
+      OR score #>> '{west, player_id}' = '?'
+      OR score #>> '{north, player_id}' = '?';
+      ", @player.id, @player.id, @player.id, @player.id]
   end
 
   # GET /players/new

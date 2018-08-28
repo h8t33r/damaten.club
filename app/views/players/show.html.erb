@@ -7,9 +7,39 @@
   </h3>
   <b>Ник:</b>
   <%= if @player.nickname != "" then @player.nickname else "не указан" end %>
+  <br>
+  <b>Сыграно игр:</b>
+  <%= @games.count %>
 </p>
-<p>
-  game data
-</p>
-<%= link_to 'Edit', edit_player_path(@player) %> |
-<%= link_to 'Back', players_path %>
+<table class="striped result">
+  <thead>
+    <tr>
+      <th colspan="2">Восток</th>
+      <th colspan="2">Юг</th>
+      <th colspan="2">Запад</th>
+      <th colspan="2">Север</th>
+      <th style="text-align: right;">Сумма</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @games.each do |game| %>
+    <tr>
+      <td><%= link_to game.created_at.strftime("%Y.%m.%d"), game %></td>
+
+      <td><%= get_player_name("east", game, @players) %></td>
+      <td><%= game.score["east"]["player_score"] %></td>
+
+      <td><%= get_player_name("south", game, @players) %></td>
+      <td><%= game.score["south"]["player_score"] %></td>
+
+      <td><%= get_player_name("west", game, @players) %></td>
+      <td><%= game.score["west"]["player_score"] %></td>
+      
+      <td><%= get_player_name("north", game, @players) %></td>
+      <td><%= game.score["north"]["player_score"]%></td>
+
+      <td style="text-align: right;"><%= score_sum(game) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,72 @@
+<%= form_with(model: rule, local: true) do |form| %>
+  <% if rule.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(rule.errors.count, "error") %> prohibited this rule from being saved:</h2>
+
+      <ul>
+      <% rule.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <%= rule_qualifier("winner-score", "Выигрышные очки", "numeric", "Минимальное количество очков для победы в ханчане") %>
+  <%= rule_qualifier("start-score", "Стартовые очки", "numeric", "Стартовые очки для каждого из игроков") %>
+  <%= rule_qualifier("tobi-hakoten", "Тоби/Хакотен", "switch", "Банкротство, при уходе в минус игра заканчивается") %>
+  <%= rule_qualifier("shaaba", "Шааба", "switch", "Если не набрано необходимое количество очков, играется западный раунд") %>
+  <%= rule_qualifier("uma", "Ума", "switch", "Выплата от игроков, занявших 3-4 место игрокам, занявшим 1-2 место соответственно") %>
+  <br>
+  <%= rule_qualifier("abortive-draw", "Абортивная ничья", "switch", "test") %>
+  <%= rule_qualifier("agariyame", "Агарияме", "switch", "test") %>
+  <%= rule_qualifier("atamahane", "Атамахане", "switch", "") %>
+  <%= rule_qualifier("atozuke_tenpai", "Атодзуке тенпай", "switch", "") %>
+  <%= rule_qualifier("temporary-furiten", "Временный фуритен", "switch", "") %>
+  <%= rule_qualifier("kuikake", "Куикаке", "switch", "") %>
+  <%= rule_qualifier("kuitan", "Куитан", "switch", "") %>
+  <%= rule_qualifier("ryanhan-shibari", "Рянхансибари", "switch", "") %>
+  <%= rule_qualifier("renchan", "Ренчан", "switch", "") %>
+  <%= rule_qualifier("triple-ron", "Тройной рон", "switch", "") %>
+  <%= rule_qualifier("furiten-riichi", "Фуритен риичи", "switch", "") %>
+  <%= rule_qualifier("chombo", "Чомбо", "numeric", "") %>
+
+  <br>
+  <%= rule_qualifier("aka-dora", "Ака-дора", "switch", "") %>
+  <%= rule_qualifier("kan-dora", "Кан-дора", "switch", "") %>
+  <%= rule_qualifier("ura-dora", "Ура-дора", "switch", "") %>
+  <%= rule_qualifier("kan-ura-dora", "Кан-ура-дора", "switch", "") %>
+  <br>
+  <%= rule_qualifier("ippatsu-tsumo", "Иппацу", "switch", "") %>
+  <%= rule_qualifier("local-yaku", "Локальные яку", "switch", "") %>
+  <%= rule_qualifier("nagashi-mangan", "Нагаши манган", "switch", "") %>
+  <%= rule_qualifier("open-riichi", "Открытое риичи", "switch", "") %>
+  <%= rule_qualifier("sekinin-barai", "Секин барай", "switch", "") %>
+  <%= rule_qualifier("renhou", "Ренхо", "switch", "") %>
+  <%= rule_qualifier("haitei-rinshan", "Хайтей риншан", "switch", "") %>
+  <br>
+  <%= rule_qualifier("double-yakuman", "Двойной якуман", "switch", "") %>
+  <%= rule_qualifier("kazoe-yakuman", "Казое якуман", "switch", "") %>
+  <%= rule_qualifier("kokushi-chankan", "Кокуши чанкан", "switch", "") %>
+  <%= rule_qualifier("paarenchan", "Пааренчан", "switch", "") %>
+  <%= rule_qualifier("pao-rule", "Правило пао", "switch", "") %>
+  <%= rule_qualifier("ryuuiisou", "Рюисо хацу", "switch", "") %>
+  <%= rule_qualifier("yakuman-counting", "Сложение якуманов", "switch", "") %>
+  <%= rule_qualifier("triple-yakuman", "Тройной якуман", "switch", "") %>
+  <br>
+  <%= rule_qualifier("kiriyage-mangan", "Кирияге манган", "switch", "4/30 и 3/60 округляются до мангана") %>
+  <%= rule_qualifier("pao-renchan-payments", "Оплата ренчана при пао", "switch", "") %>
+  <%= rule_qualifier("", "Остаток риичи палочек", "switch", "") %>
+  <%= rule_qualifier("yakitori", "Якитори", "switch", "") %>
+
+  <div class="row">
+    <div class="actions col s6">
+      <%= form.submit "Продолжить", :class => "btn waves-effect waves-light" %>
+    </div>
+  </div>
+
+<% end %>

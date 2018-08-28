@@ -24,54 +24,23 @@
     </tr>
   </thead>
   <tbody>
-  <% @games.each do |game| 
-
-  score = [
-    game.score["east"]["player_score"],
-    game.score["south"]["player_score"],
-    game.score["west"]["player_score"],
-    game.score["north"]["player_score"]
-  ]
-
-
-  %>
+  <% @games.each do |game| %>
     <tr>
       <td><%= link_to game.created_at.strftime("%Y.%m.%d"), game %></td>
 
-      <td><%= if (score.max == game.score["east"]["player_score"])
-                then "👑 " + @players.find(game.score["east"]["player_id"]).name
-                else @players.find(game.score["east"]["player_id"]).name
-              end
-      %></td>
+      <td><%= get_player_name("east", game, @players) %></td>
       <td><%= game.score["east"]["player_score"] %></td>
 
-      <td><%= if (score.max == game.score["south"]["player_score"])
-                then "👑 " + @players.find(game.score["south"]["player_id"]).name
-                else @players.find(game.score["south"]["player_id"]).name
-              end
-      %></td>
+      <td><%= get_player_name("south", game, @players) %></td>
       <td><%= game.score["south"]["player_score"] %></td>
 
-      <td><%= if (score.max == game.score["west"]["player_score"])
-                then "👑 " + @players.find(game.score["west"]["player_id"]).name
-                else @players.find(game.score["west"]["player_id"]).name
-              end
-      %></td>
+      <td><%= get_player_name("west", game, @players) %></td>
       <td><%= game.score["west"]["player_score"] %></td>
       
-      <td><%= if (score.max == game.score["north"]["player_score"])
-                then "👑 " + @players.find(game.score["north"]["player_id"]).name
-                else @players.find(game.score["north"]["player_id"]).name
-              end
-      %></td>
+      <td><%= get_player_name("north", game, @players) %></td>
       <td><%= game.score["north"]["player_score"]%></td>
 
-      <td style="text-align: right;"><%=
-        game.score["east"]["player_score"].to_i +
-        game.score["south"]["player_score"].to_i +
-        game.score["west"]["player_score"].to_i +
-        game.score["north"]["player_score"].to_i
-      %></td>
+      <td style="text-align: right;"><%= score_sum(game) %></td>
     </tr>
   <% end %>
   </tbody>
