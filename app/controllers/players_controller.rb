@@ -16,7 +16,8 @@ class PlayersController < ApplicationController
       WHERE score #>> '{east, player_id}' = '?'
       OR score #>> '{south, player_id}' = '?'
       OR score #>> '{west, player_id}' = '?'
-      OR score #>> '{north, player_id}' = '?';
+      OR score #>> '{north, player_id}' = '?'
+      ORDER BY created_at DESC;
       ", @player.id, @player.id, @player.id, @player.id]
   end
 
