@@ -5,12 +5,19 @@
     <%= if @player.activated == true then "✔" else "✖" end %>
     <%= @player.name %> 
   </h3>
-  <b>Ник:</b>
-  <%= if @player.nickname != "" then @player.nickname else "не указан" end %>
-  <br>
-  <b>Сыграно игр:</b>
-  <%= @games.count %>
 </p>
+<!-- Пока не понятно, как считать места правильно, если ЮЗЕРНЕЙМ1 и ЮЗЕРНЕЙМ2 получили одинаковое кол-во очков к концу ханчана
+<table class="striped result">
+  <tr>
+    <td>Сыграно игр</td><td><%= @games.count %></td>
+    <td>Первых мест</td><td><%= results_counter(@games, @player.id, 3) %></td>
+    <td>Вторых мест</td><td><%= results_counter(@games, @player.id, 2) %></td>
+    <td>Третьих мест</td><td><%= results_counter(@games, @player.id, 1) %></td>
+    <td>Четвертых мест</td><td><%= results_counter(@games, @player.id, 0) %></td>
+    <td style="text-align: right;">Среднее место</td><td></td>
+  </tr>
+</table>
+-->
 <table class="striped result">
   <thead>
     <tr>

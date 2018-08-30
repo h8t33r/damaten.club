@@ -12,7 +12,7 @@ class PlayersController < ApplicationController
   def show
     @players = Player.select(:id, :name)
     @games = Game.find_by_sql ["SELECT id, score, created_at
-      FROM public.games
+      FROM games
       WHERE score #>> '{east, player_id}' = '?'
       OR score #>> '{south, player_id}' = '?'
       OR score #>> '{west, player_id}' = '?'
