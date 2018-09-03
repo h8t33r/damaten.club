@@ -6,18 +6,19 @@
     <%= @player.name %> 
   </h3>
 </p>
-<!-- Пока не понятно, как считать места правильно, если ЮЗЕРНЕЙМ1 и ЮЗЕРНЕЙМ2 получили одинаковое кол-во очков к концу ханчана
-<table class="striped result">
+<table class="higlight">
   <tr>
     <td>Сыграно игр</td><td><%= @games.count %></td>
-    <td>Первых мест</td><td><%= results_counter(@games, @player.id, 3) %></td>
-    <td>Вторых мест</td><td><%= results_counter(@games, @player.id, 2) %></td>
-    <td>Третьих мест</td><td><%= results_counter(@games, @player.id, 1) %></td>
-    <td>Четвертых мест</td><td><%= results_counter(@games, @player.id, 0) %></td>
-    <td style="text-align: right;">Среднее место</td><td></td>
+
+    <td>Первых мест</td><td><%= results_counter(@games, @player.id, 3).count %></td>
+    <td>Вторых мест</td><td><%= results_counter(@games, @player.id, 2).count %></td>
+    <td>Третьих мест</td><td><%= results_counter(@games, @player.id, 1).count %></td>
+    <td>Четвертых мест</td><td><%= results_counter(@games, @player.id, 0).count %></td>
+
+    <td>Лучший результат</td><td><%= results_counter(@games, @player.id, 3).max %></td>
   </tr>
 </table>
--->
+<!-- Хз как делать проверку на место тут, с суммой я кое-как справился %) -->
 <table class="striped result">
   <thead>
     <tr>
