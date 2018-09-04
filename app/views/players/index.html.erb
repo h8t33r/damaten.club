@@ -11,6 +11,7 @@
       <th>Фамилия Имя</th>
       <th>Ник</th>
       <th>Всего игр</th>
+      <th>Среднее место</th>
       <th>1 место</th>
       <th>2 место</th>
       <th>3 место</th>
@@ -30,11 +31,13 @@
       p4 = results_counter(@games, player.id, 0).count
       games_count = p1+p2+p3+p4
       best_result = results_counter(@games, player.id, 3).max
+      games_avg_place = ((1*p1) + (2*p2) + (3*p3) + (4*p4)) / games_count.to_f
     %>
       <tr>
         <td><%= link_to player.name, player %></td>
         <td><%= player.nickname %></td>
         <td><%= games_count %></td>
+        <td><%= games_avg_place.round 1 %></td>
         <td><%= (100 / (games_count / p1.to_f)).round 1 %>%</td>
         <td><%= (100 / (games_count / p2.to_f)).round 1 %>%</td>
         <td><%= (100 / (games_count / p3.to_f)).round 1 %>%</td>
