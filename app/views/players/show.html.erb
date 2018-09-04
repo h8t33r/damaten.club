@@ -2,20 +2,28 @@
 
 <p>
   <h3>
-    <%= if @player.activated == true then "✔" else "✖" end %>
+    <!-- <%= if @player.activated == true then "✔" else "✖" end %> -->
     <%= @player.name %> 
   </h3>
 </p>
+<%
+  games_count = @games.count
+  p1 = results_counter(@games, @player.id, 3).count
+  p2 = results_counter(@games, @player.id, 2).count
+  p3 = results_counter(@games, @player.id, 1).count
+  p4 = results_counter(@games, @player.id, 0).count
+  best_result = results_counter(@games, @player.id, 3).max
+%>
 <table class="higlight">
   <tr>
-    <td>Сыграно игр</td><td><%= @games.count %></td>
+    <td>Сыграно игр</td><td><%= games_count %></td>
 
-    <td>Первых мест</td><td><%= results_counter(@games, @player.id, 3).count %></td>
-    <td>Вторых мест</td><td><%= results_counter(@games, @player.id, 2).count %></td>
-    <td>Третьих мест</td><td><%= results_counter(@games, @player.id, 1).count %></td>
-    <td>Четвертых мест</td><td><%= results_counter(@games, @player.id, 0).count %></td>
+    <td>Первых мест</td><td><%= p1 %> | <%= (100 / (games_count / p1.to_f)).round 2 %>%</td>
+    <td>Вторых мест</td><td><%= p2 %> | <%= (100 / (games_count / p2.to_f)).round 2 %>%</td>
+    <td>Третьих мест</td><td><%= p3 %> | <%= (100 / (games_count / p3.to_f)).round 2 %>%</td>
+    <td>Четвертых мест</td><td><%= p4 %> | <%= (100 / (games_count / p4.to_f)).round 2 %>%</td>
 
-    <td>Лучший результат</td><td><%= results_counter(@games, @player.id, 3).max %></td>
+    <td>Лучший результат</td><td><%= best_result %></td>
   </tr>
 </table>
 <!-- Хз как делать проверку на место тут, с суммой я кое-как справился %) -->
