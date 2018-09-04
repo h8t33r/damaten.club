@@ -5,6 +5,7 @@ class PlayersController < ApplicationController
   # GET /players.json
   def index
     @players = Player.order(activated: :desc)
+    @games = Game.all
   end
 
   # GET /players/1
