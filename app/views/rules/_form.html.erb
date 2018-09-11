@@ -16,8 +16,8 @@
     <%= form.text_field :name %>
   </div>
 
-  <%= rule_qualifier("winner-score", "Выигрышные очки", "numeric", "Минимальное количество очков для победы в ханчане") %>
-  <%= rule_qualifier("start-score", "Стартовые очки", "numeric", "Стартовые очки для каждого из игроков") %>
+  <%= rule_qualifier("winner-points", "Выигрышные очки", "numeric", "Минимальное количество очков для победы в ханчане") %>
+  <%= rule_qualifier("start-points", "Стартовые очки", "numeric", "Стартовые очки для каждого из игроков") %>
   <%= rule_qualifier("tobi-hakoten", "Тоби/Хакотен", "switch", "Банкротство, при уходе в минус игра заканчивается") %>
   <%= rule_qualifier("shaaba", "Шааба", "switch", "Если не набрано необходимое количество очков, играется западный раунд") %>
   <%= rule_qualifier("uma", "Ума", "switch", "Выплата от игроков, занявших 3-4 место игрокам, занявшим 1-2 место соответственно") %>
@@ -60,7 +60,7 @@
   <br>
   <%= rule_qualifier("kiriyage-mangan", "Кирияге манган", "switch", "4/30 и 3/60 округляются до мангана") %>
   <%= rule_qualifier("pao-renchan-payments", "Оплата ренчана при пао", "switch", "") %>
-  <%= rule_qualifier("", "Остаток риичи палочек", "switch", "") %>
+  <%= rule_qualifier("last-riichi", "Остаток риичи палочек", "switch", "") %>
   <%= rule_qualifier("yakitori", "Якитори", "switch", "") %>
 
   <div class="row">

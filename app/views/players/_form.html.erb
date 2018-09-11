@@ -22,6 +22,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :email, "Email" %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
     <label>
       <%= form.check_box :activated, class: "filled-in" %>
       <span>Активирован?</span>

@@ -4,3 +4,5 @@ body, table, div, td, th {font-family: 'Roboto Condensed', sans-serif;}
 .result tr td {border: 1px solid #EEE;}
 
 .table_without_borders {border: none}
+
+.d-card {border: 2px solid #EEE;}

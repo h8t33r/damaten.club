@@ -1,0 +1,10 @@
+<% @players.each do |player| %>
+  <%= player.id %> -
+  <%= player.name %> -
+  <%= player.nickname %> -
+  <%= player.activated %>
+  <%= player.email %>
+  <%= link_to 'Редактировать', edit_player_path(player) %> |
+  <%= link_to 'Удалить', player, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <br>
+<% end %>
