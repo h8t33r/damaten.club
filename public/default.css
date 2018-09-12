@@ -9,13 +9,5 @@ body, table, div, td, th {font-family: 'Roboto Condensed', sans-serif;}
 
 .notice, .alert {padding-left: 15px; padding-right: 15px;}
 
-  body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
-
-  main {
-    flex: 1 0 auto;
-  }
-      
+body {display: flex; min-height: 100vh; flex-direction: column;}
+main {flex: 1 0 auto;}
