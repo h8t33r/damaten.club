@@ -1,0 +1,22 @@
+<table>
+  <thead>
+    <tr>
+      <td>Id</td>
+      <td>Email</td>
+      <td>Player_Id</td>
+      <td>Создан</td>
+      <td>Изменен</td>
+    </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.id %></td>
+      <td><%= user.email %></td>
+      <td><%= user.player_id %></td>      
+      <td><%= user.created_at %></td>
+      <td><%= user.updated_at %></td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :games
   resources :players
   
-  get 'all' => 'welcome#index'
+  get 'welcome' => 'welcome#index'
 
   get 'api/about'
   get 'api/players'
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   #get 'api/csv' => 'api#csv_import'
 
   get 'admin/players' => 'players#admin_players'
-
+  get 'admin/users' => 'admin#show_devise_users'
   root 'games#index'
   #root 'welcome#index'
 end

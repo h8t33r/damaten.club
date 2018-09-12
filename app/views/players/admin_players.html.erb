@@ -1,10 +1,29 @@
-<% @players.each do |player| %>
-  <%= player.id %> -
-  <%= player.name %> -
-  <%= player.nickname %> -
-  <%= player.activated %>
-  <%= player.email %>
-  <%= link_to 'Редактировать', edit_player_path(player) %> |
-  <%= link_to 'Удалить', player, method: :delete, data: { confirm: 'Are you sure?' } %>
-  <br>
-<% end %>
+<table>
+  <thead>
+    <tr>
+      <td>Id</td>
+      <td>Имя Фамилия</td>
+      <td>Ник</td>
+      <td>Активация</td>
+      <td>Email</td>
+      <td>Создан</td>
+      <td>Изменен</td>
+      <td colspan="2">Управление</td>
+    </tr>
+  </thead>
+  <tbody>
+  <% @players.each do |player| %>
+    <tr>
+      <td><%= player.id %></td>
+      <td><%= player.name %></td>
+      <td><%= player.nickname %></td>
+      <td><%= player.activated %></td>
+      <td><%= player.email %></td>
+      <td><%= player.created_at %></td>
+      <td><%= player.updated_at %></td>
+      <td><%= link_to 'Редактировать', edit_player_path(player) %></td>
+      <td><%= link_to 'Удалить', player, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>
