@@ -1,9 +1,36 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Score:</strong>
-  <%= @game.score %>
-</p>
-
+<h5>Результат игры</h5>
+<strong><%= @game.created_at.strftime("%Y.%m.%d") %></strong>
+<table class="striped result">
+  <thead>
+    <tr>
+      <th>Стартовый ветер</th>
+      <th>Имя игрока</th>
+      <th>Результат</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Восток</td>
+      <td><%= get_player_name("east", @game, @players) %></td>
+      <td><%= @game.score["east"]["player_score"] %></td>
+    </tr>
+    <tr>
+      <td>Юг</td>
+      <td><%= get_player_name("south", @game, @players) %></td>
+      <td><%= @game.score["south"]["player_score"] %></td>
+    </tr>
+    <tr>
+      <td>Запад</td>
+      <td><%= get_player_name("west", @game, @players) %></td>
+      <td><%= @game.score["west"]["player_score"] %></td>
+    </tr>
+    <tr>
+      <td>Север</td>
+      <td><%= get_player_name("north", @game, @players) %></td>
+      <td><%= @game.score["north"]["player_score"]%></td>
+    <!--</tr>
+      <td colspan="2" style="text-align: right;"></td><td><%= score_sum(@game) %></td>
+    </tr>-->
+  </tbody>
+</table>
 <!-- <%= link_to 'Edit', edit_game_path(@game) %> |-->
-<%= link_to 'Back', games_path %>

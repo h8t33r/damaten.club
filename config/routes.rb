@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :rules
   resources :games
   resources :players
@@ -12,6 +13,6 @@ Rails.application.routes.draw do
 
   get 'admin/players' => 'players#admin_players'
 
-  #root 'games#index'
-  root 'welcome#index'
+  root 'games#index'
+  #root 'welcome#index'
 end

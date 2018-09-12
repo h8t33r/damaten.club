@@ -1,14 +1,15 @@
-<p id="notice"><%= notice %></p>
+<% if user_signed_in? %>
 <div class="row">
   <div class="col s4">
     <a class="waves-effect waves-light btn" href="/players/new">Добавить игрока</a>
   </div>
 </div>
+<% end %>
 <table class="striped result">
   <thead>
     <tr>
       <th>Фамилия Имя</th>
-      <th>Ник</th>
+      <% if user_signed_in? %><th>Ник</th><% end %>
       <th>Всего игр</th>
       <th>Среднее место</th>
       <th>1 место</th>
@@ -16,14 +17,11 @@
       <th>3 место</th>
       <th>4 место</th>
       <th>Лучший результат</th>
-      <!--<th>Активирован?</th>-->
     </tr>
   </thead>
 
   <tbody>
     <% @players.each do |player|
-
-    
       p1 = results_counter(@games, player.id, 3).count
       p2 = results_counter(@games, player.id, 2).count
       p3 = results_counter(@games, player.id, 1).count
@@ -34,7 +32,7 @@
     %>
       <tr>
         <td><%= link_to player.name, player %></td>
-        <td><%= player.nickname %></td>
+        <% if user_signed_in? %><td><%= player.nickname %></td><% end %>
         <td><%= games_count %></td>
         <td><%= games_avg_place.round 1 %></td>
         <td><%= (100 / (games_count / p1.to_f)).round 1 %>%</td>
@@ -42,9 +40,6 @@
         <td><%= (100 / (games_count / p3.to_f)).round 1 %>%</td>
         <td><%= (100 / (games_count / p4.to_f)).round 1 %>%</td>
         <td><%= best_result %></td>
-        <!--<td><%= if player.activated == true then "Да" else "Нет" end %></td>-->
-        <!--<td><%= link_to 'Редактировать', edit_player_path(player) %></td>-->
-
       </tr>
     <% end %>
   </tbody>

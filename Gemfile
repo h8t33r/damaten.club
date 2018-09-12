@@ -18,6 +18,8 @@ gem 'materialize-sass', '~> 1.0.0.rc2'
 
 gem 'unicorn', '~> 5.1.0'
 
+gem 'devise', '~> 4.2'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end

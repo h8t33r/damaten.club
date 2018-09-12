@@ -51,13 +51,32 @@
     <nav>
       <div class="nav-wrapper light-blue darken-4">
         <ul id="nav-mobile" class="left">
-          <li><a href="/">Главная</a></li>
+          <!--<li><a href="/">Главная</a></li>-->
           <li><a href="/players">Игроки</a></li>
           <li><a href="/games">Результаты</a></li>
           <!--<li><a href="/rules">Правила</a></li> не надо баловаться, я просто хочу быстрее в продакшн-->
         </ul>
-        <!--<ul id="nav-mobile" class="right">
-          <li><a href="/api/about">API</a></li>
-        </ul>-->
+        <ul id="nav-mobile" class="right teal darken-1">
+          <% if notice %>
+            <!--<i class="large material-icons">person_outline</i>-->
+            <li class="notice green"><%= notice %></li>
+          <% end %>
+          <% if alert %>
+            <!--<i class="large material-icons">error_outline</i>-->
+            <li class="alert red"><%= alert %></li>
+          <% end %>
+          <% if user_signed_in? %>
+            <% if current_user.email == "h2@damaten.club" %>
+              <li><%= link_to "About API", api_about_path %></li>
+              <li><%= link_to "Администрирование", admin_players_path %></li>
+            <% end %>
+            <li class="notice pink darken-3"><%= current_user.email %></li>
+            <li><% link_to "Профиль: " + current_user.email, edit_user_registration_path %></li>
+            <li><%= link_to "Выйти", destroy_user_session_path, method: :delete %></li>
+          <% else %>
+            <!--<li><% link_to "Регистрация", new_user_registration_path %></li>-->
+            <li><%= link_to "Войти", new_user_session_path %></li>
+          <% end %>
+        </ul>
       </div>
     </nav>

@@ -1,4 +1,5 @@
 class ApiController < ApplicationController
+  before_action :authenticate_user!, except: [:players, :games]
   require 'csv'
 
   def about

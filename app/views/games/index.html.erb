@@ -1,5 +1,4 @@
-<p id="notice"><%= notice %></p>
-
+<% if user_signed_in? %>
 <div class="row">
   <div class="col s4">
     <a class="waves-effect waves-light btn" href="/games/new">Добавить результат</a>
@@ -11,11 +10,11 @@
     <a class="waves-effect waves-light btn">2018</a>
   </div>-->
 </div>
-
+<% end %>
 <table class="striped result">
   <thead>
     <tr>
-      <th>C: <%= @games.count %></th>
+      <th>Игр: <%= @games.count %></th>
       <th colspan="2">Восток</th>
       <th colspan="2">Юг</th>
       <th colspan="2">Запад</th>

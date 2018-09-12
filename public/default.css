@@ -6,3 +6,16 @@ body, table, div, td, th {font-family: 'Roboto Condensed', sans-serif;}
 .table_without_borders {border: none}
 
 .d-card {border: 2px solid #EEE;}
+
+.notice, .alert {padding-left: 15px; padding-right: 15px;}
+
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+      

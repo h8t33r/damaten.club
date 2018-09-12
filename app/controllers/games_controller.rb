@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
+  before_action :authenticate_user!, except: [:show, :index]
   before_action :set_game, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -7,6 +8,7 @@ class GamesController < ApplicationController
   end
 
   def show
+    @players = Player.select(:name)
   end
 
   def new
