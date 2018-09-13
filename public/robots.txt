@@ -1,2 +1,14 @@
 User-agent: *
-Disallow: /
+Disallow:
+
+User-agent: Yandex
+Disallow: /api/
+Disallow: /admin/
+Disallow: /users/
+
+User-agent: Googlebot
+Disallow: /api/
+Disallow: /admin/
+Disallow: /users/
+
+Sitemap: http://damaten.club/sitemap.xml
