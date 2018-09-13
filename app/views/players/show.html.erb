@@ -13,12 +13,6 @@
   best_result = results_counter(@games, @player.id, 3).max
 %>
 
-<p><%= results_counter(@games, @player.id, 3) %></p>
-<p><%= results_counter(@games, @player.id, 2) %></p>
-<p><%= results_counter(@games, @player.id, 1) %></p>
-<p><%= results_counter(@games, @player.id, 0) %></p>
-
-
 <table class="higlight">
   <tr>
     <td>Сыграно игр</td><td><%= games_count %></td>
