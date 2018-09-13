@@ -47,7 +47,7 @@
             <% if current_user.email == "h2@damaten.club" %>
               <li><a class="dropdown-trigger" href="#!" data-target="admin-dropdown">Администрирование<i class="material-icons right">arrow_drop_down</i></a></li>
             <% end %>
-            <li class="notice pink darken-3"><%= current_user.email %></li>
+            <li class="notice teal lighten-2"><%= current_user.email %></li>
             <li><%= link_to "Выйти", destroy_user_session_path, method: :delete %></li>
           <% else %>
             <!--<li><% link_to "Регистрация", new_user_registration_path %></li>-->

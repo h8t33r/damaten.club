@@ -13,6 +13,6 @@ Rails.application.routes.draw do
 
   get 'admin/players' => 'players#admin_players'
   get 'admin/users' => 'admin#show_devise_users'
-  root 'games#index'
-  #root 'welcome#index'
+  #root 'games#index'
+  root 'welcome#index'
 end
