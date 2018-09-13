@@ -24,3 +24,8 @@
   },
   </code>
 </p>
+<% if user_signed_in? %>
+<p>
+  <%= link_to "Выгрузить результаты из CSV", api_csv_path %>
+</p>
+<% end %>
