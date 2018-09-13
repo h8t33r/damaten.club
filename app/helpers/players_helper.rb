@@ -7,10 +7,10 @@ module PlayersHelper
     games.each do |game|
 
       score = [
-        game.score["east"]["player_score"],
-        game.score["south"]["player_score"],
-        game.score["west"]["player_score"],
-        game.score["north"]["player_score"]
+        game.score["east"]["player_score"].to_i,
+        game.score["south"]["player_score"].to_i,
+        game.score["west"]["player_score"].to_i,
+        game.score["north"]["player_score"].to_i
       ]
 
       if p_id == game.score["east"]["player_id"].to_i &&
