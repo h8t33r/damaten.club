@@ -1,59 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Damaten Ivanovo</title>
 
     <meta property="og:title" content="Ивановский клуб Риичи маджонга - Даматен">
-    <meta property="og:image" content="http://damaten.club/ivanovo_damaten_for_social.png">
-    <meta property="og:description" content="Ивановский клуб Риичи маджонга - Даматен. Правила игры, обучающие материалы, клубный рейтинг и многое другое.">
+    <meta property="og:image" content="http://damaten.club/materialize/images/ivanovo_damaten_for_social_vk.png">
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-21822408-6"></script>
-    <script type="text/javascript" src="/materialize.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script>
-      // Google Analytics
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'UA-21822408-6');
-
-      // Result Calc function
-      function result_sum() {
-
-        var r_sum = 0;
-
-        var r_east   = parseInt(document.getElementById('east_player_score').value);
-        var r_south  = parseInt(document.getElementById('south_player_score').value);
-        var r_west   = parseInt(document.getElementById('west_player_score').value);
-        var r_north  = parseInt(document.getElementById('north_player_score').value);
-
-        if (isNaN(r_east) == true) r_east = 0;
-        if (isNaN(r_south) == true) r_south = 0;
-        if (isNaN(r_west) == true) r_west = 0;
-        if (isNaN(r_north) == true) r_north = 0;
-
-        var r_sum = r_east + r_south + r_west + r_north;
-
-        document.getElementById('result_SUM').innerHTML = r_sum;
-      }
-      // Mobile sidebar
-      M.AutoInit();
-      $(document).ready(function(){
-        $('.sidenav-trigger').sidenav();
-        $(".dropdown-trigger").dropdown();
-      });
-    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-    <title>Damaten Ivanovo</title>
+    <meta name="theme-color" content="#0D47A1">
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
     <link rel="icon" href="/favicon.png" type="image/png" />
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <link rel="stylesheet" href="/materialize.min.css" type="text/css" media="screen,projection" />
+    <link rel="stylesheet" href="/materialize/css/materialize.css" type="text/css" media="screen,projection" />
     <link rel="stylesheet" href="/default.css" type="text/css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata" type="text/css">
 
@@ -61,15 +25,12 @@
 
   <body>
     <nav class="light-blue darken-4">
-
-      <a href="#!" data-activates="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-
-      <div class="nav-wrapper light-blue darken-4">
+      <a href="#!" data-target="mobile-nav" class="sidenav-trigger sidenav-tr"><i class="material-icons">menu</i></a>
+      <div class="nav-wrapper light-blue darken-4 hide-on-med-and-down">
         <ul id="nav-mobile" class="left">
-          <!--<li><a href="/">Главная</a></li>-->
+          <li><a href="/">Главная</a></li>
           <li><a href="/players">Игроки</a></li>
           <li><a href="/games">Результаты</a></li>
-          <!--<li><a href="/rules">Правила</a></li> не надо баловаться, я просто хочу быстрее в продакшн-->
         </ul>
         <ul id="nav-mobile" class="right teal darken-1">
 
@@ -84,13 +45,9 @@
 
           <% if user_signed_in? %>
             <% if current_user.email == "h2@damaten.club" %>
-              <li><%= link_to "About API", api_about_path %></li>
-              <li><%= link_to "Players", admin_players_path %></li>
-              <li><%= link_to "Users", admin_users_path %></li>
-              <!--<li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>-->
+              <li><a class="dropdown-trigger" href="#!" data-target="admin-dropdown">Администрирование<i class="material-icons right">arrow_drop_down</i></a></li>
             <% end %>
             <li class="notice pink darken-3"><%= current_user.email %></li>
-            <li><% link_to "Профиль: " + current_user.email, edit_user_registration_path %></li>
             <li><%= link_to "Выйти", destroy_user_session_path, method: :delete %></li>
           <% else %>
             <!--<li><% link_to "Регистрация", new_user_registration_path %></li>-->
@@ -100,18 +57,43 @@
         </ul>
       </div>
     </nav>
-<!--
-    <ul id="dropdown1" class="dropdown-content">
-      <li><a href="#!">one</a></li>
-      <li><a href="#!">two</a></li>
+  <% if user_signed_in? and current_user.email == "h2@damaten.club" %>
+    <ul id="admin-dropdown" class="dropdown-content">
+      <li><%= link_to "Players", admin_players_path %></li>
+      <li><%= link_to "Users", admin_users_path %></li>
       <li class="divider"></li>
-      <li><a href="#!">three</a></li>
+      <li><%= link_to "About API", api_about_path %></li>
     </ul>
+  <% end %>
+
 
     <ul class="sidenav" id="mobile-nav">
-      <li><a href="sass.html">Sass</a></li>
-      <li><a href="badges.html">Components</a></li>
-      <li><a href="collapsible.html">Javascript</a></li>
-      <li><a href="mobile.html">Mobile</a></li>
+      <li><div class="user-view">
+            <div class="background">
+              <img src="/materialize/images/ivanovo_damaten_for_social_vk.png" width="300px">
+            </div>
+            <% if user_signed_in? %>
+              <a href="<%= edit_user_registration_path %>">
+                <span class="white-text email"><%= current_user.email %></span>
+              </a>
+            <% end %>
+          </div>
+      </li>    
+      <li><a href="/">Главная</a></li>
+      <li><a href="/players">Игроки</a></li>
+      <li><a href="/games">Результаты</a></li>
+      <li class="divider"></li>
+      <% if user_signed_in? %>
+        <% if current_user.email == "h2@damaten.club" %>
+          <li><%= link_to "Players", admin_players_path %></li>
+          <li><%= link_to "Users", admin_users_path %></li>
+          <li><%= link_to "About API", api_about_path %></li>
+          <li class="divider"></li>
+        <% end %>
+            <li><% link_to "Профиль: " + current_user.email, edit_user_registration_path %></li>
+            <li><%= link_to "Выйти", destroy_user_session_path, method: :delete %></li>
+          <% else %>
+            <!--<li><% link_to "Регистрация", new_user_registration_path %></li>-->
+            <li><%= link_to "Войти", new_user_session_path %></li>
+          <% end %>
     </ul>
--->
