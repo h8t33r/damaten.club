@@ -6,11 +6,18 @@
 </p>
 <%
   games_count = @games.count
-  p1 = results_counter(@games, @player.id, 3).count
-  p2 = results_counter(@games, @player.id, 2).count
-  p3 = results_counter(@games, @player.id, 1).count
-  p4 = results_counter(@games, @player.id, 0).count
-  best_result = results_counter(@games, @player.id, 3).max
+
+  p1a = results_counter(@games, @player.id, 3)
+  p2a = results_counter(@games, @player.id, 2)
+  p3a = results_counter(@games, @player.id, 1)
+  p4a = results_counter(@games, @player.id, 0)
+
+  p1 = p1a.count
+  p2 = p2a.count
+  p3 = p3a.count
+  p4 = p4a.count
+
+  best_result = Array.new << p1a << p2a << p3a << p4a
 %>
 
 <table class="higlight">
@@ -22,7 +29,7 @@
     <td>Третьих мест</td><td><%= p3 %> | <%= (100 / (games_count / p3.to_f)).round 2 %>%</td>
     <td>Четвертых мест</td><td><%= p4 %> | <%= (100 / (games_count / p4.to_f)).round 2 %>%</td>
 
-    <td>Лучший результат</td><td><%= best_result %></td>
+    <td>Лучший результат</td><td><%= best_result.flatten.max %></td>
   </tr>
 </table>
 <!-- Хз как делать проверку на место тут, с суммой я кое-как справился %) -->
