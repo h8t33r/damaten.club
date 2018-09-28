@@ -22,12 +22,19 @@
 
   <tbody>
     <% @players.each do |player|
-      p1 = results_counter(@games, player.id, 3).count
-      p2 = results_counter(@games, player.id, 2).count
-      p3 = results_counter(@games, player.id, 1).count
-      p4 = results_counter(@games, player.id, 0).count
+      p1a = results_counter(@games, player.id, 3)
+      p2a = results_counter(@games, player.id, 2)
+      p3a = results_counter(@games, player.id, 1)
+      p4a = results_counter(@games, player.id, 0)
+
+      p1 = p1a.count
+      p2 = p2a.count
+      p3 = p3a.count
+      p4 = p4a.count
+
       games_count = p1+p2+p3+p4
-      best_result = results_counter(@games, player.id, 3).max
+      best_result = Array.new << p1a << p2a << p3a << p4a
+
       games_avg_place = ((1*p1) + (2*p2) + (3*p3) + (4*p4)) / games_count.to_f
     %>
       <tr>
@@ -39,7 +46,7 @@
         <td><%= (100 / (games_count / p2.to_f)).round 1 %>%</td>
         <td><%= (100 / (games_count / p3.to_f)).round 1 %>%</td>
         <td><%= (100 / (games_count / p4.to_f)).round 1 %>%</td>
-        <td><%= best_result %></td>
+        <td><%= best_result.flatten.max %></td>
       </tr>
     <% end %>
   </tbody>
