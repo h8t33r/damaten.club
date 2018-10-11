@@ -55,6 +55,7 @@ class PlayersController < ApplicationController
   def elo_rating
 
     Player.update_all("rank = 1500")
+    Rank.delete_all
     
     games_query = "SELECT id, created_at,
       (SELECT name FROM players WHERE CAST (id AS TEXT) = games.score #>> '{east, player_id}') AS east_name,

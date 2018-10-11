@@ -10,7 +10,7 @@
     <tr>
       <th>Фамилия Имя</th>
       <th>Всего игр</th>
-      <th>Рейтинг Эло<br>(<%= link_to "в разработке", ranking_path %>)</th>
+      <% if user_signed_in? and current_user.email == "h2@damaten.club" %><th>Рейтинг Эло<br>(<%= link_to "в разработке", ranking_path %>)</th><% end %>
       <th>Среднее место</th>
       <th>1 место</th>
       <th>2 место</th>
@@ -40,7 +40,9 @@
       <tr>
         <td><%= link_to player.name, player %></td>
         <td><%= games_count %></td>
+        <% if user_signed_in? and current_user.email == "h2@damaten.club" %>
         <td> <!--<span style="color: #<%= color_rating(player.rank) %>">--><%= link_to player.rank, ranks_path(player.id) %><!--</span>--></td>
+        <% end %>
         <td><%= games_avg_place.round 1 %></td>
         <td><%= (100 / (games_count / p1.to_f)).round 1 %>%</td>
         <td><%= (100 / (games_count / p2.to_f)).round 1 %>%</td>
