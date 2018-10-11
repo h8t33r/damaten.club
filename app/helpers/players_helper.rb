@@ -43,4 +43,22 @@ module PlayersHelper
     
     return result_array
   end
+
+  def color_rating(rating)
+    case rating
+    when 0 .. 999
+      "616161"
+    when 1000 .. 1399
+      "b71c1c"
+    when 1400 .. 1499
+      "ff9800"
+    when 1500 .. 1599
+      "00c853"
+    when 1600 .. 1699
+      "2196f3"
+    else
+      "9c27b0"      
+    end
+    
+  end
 end

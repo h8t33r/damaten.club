@@ -1,14 +1,16 @@
+<h3>Игроки</h3>
 <table>
   <thead>
     <tr>
-      <td>Id</td>
-      <td>Имя Фамилия</td>
-      <td>Ник</td>
-      <td>Активация</td>
-      <td>Email</td>
-      <td>Создан</td>
-      <td>Изменен</td>
-      <td colspan="2">Управление</td>
+      <th>Id</th>
+      <th>Имя Фамилия</th>
+      <th>Ник</th>
+      <th>Активация</th>
+      <th>Email</th>
+      <th>Создан</th>
+      <th>Изменен</th>
+      <th>Рейтинг</th>
+      <th colspan="2">Управление</th>
     </tr>
   </thead>
   <tbody>
@@ -21,6 +23,7 @@
       <td><%= player.email %></td>
       <td><%= player.created_at %></td>
       <td><%= player.updated_at %></td>
+      <td><%= player.rank %></td>
       <td><%= link_to 'Редактировать', edit_player_path(player) %></td>
       <td><%= link_to 'Удалить', player, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>

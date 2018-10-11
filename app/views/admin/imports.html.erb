@@ -1,0 +1,7 @@
+<% if user_signed_in? and current_user.email == "h2@damaten.club" %>
+  <p>
+    <%= link_to "Выгрузить результаты из CSV", api_csv_path %>
+    <br>
+    <%= link_to "Пересчитать рейтинг", admin_elo_path %>
+  </p>
+<% end %>

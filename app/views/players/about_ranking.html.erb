@@ -1,0 +1,48 @@
+<h3>О расчете рейтинга</h3>
+
+<h5>Необходимые пояснения</h5>
+Расчет производится на основе формул tenhou.net (источник: <a href="http://arcturus.su/wiki/Tenhou.net_ranking">arcturus.su</a>)<br> Рейтинг так же изначально равен 1500.<br>
+При первом старте скрипт обрабатывает записи, отсортированные по дате (от меньшей к большей).<br>
+Ниже я привожу формулы и поясняю, какие переменные откуда берутся.
+
+
+<h5>1. Средний рейтинг стола (avg_table_rait)</h5>
+Это просто среднее арифметическое.
+<blockquote>
+  <code>
+    avg_table_rating = (east_rating + south_rating + west_rating + north_rating ) / 4
+  </code>
+</blockquote>
+
+<h5>2. Корректировка (adjustment)</h5>
+Если игрок сыграл общее количество игр меньшее 400 (например 126) то считаем так: 1 - (126 * 0,002) = 0,748.<br>
+Если гирок сыграл больше или равно 400 игр, то значение корректировки всегда равно 0,8.
+<blockquote>
+  <code>
+    case wind_games_count<br>
+    when 0 .. 399<br>
+    &nbsp;&nbsp;adjustment = 1 - (wind_games_count * 0.002)<br>
+    else<br>
+    &nbsp;&nbsp;adjustment = 1 - 0.2<br>
+    end
+  </code>
+</blockquote>
+
+<h5>3. База для расчета (base)</h5>
+Работает почти как ума.
+<blockquote>
+  <code>
+    first_place_base   = 30<br>
+    second_place_base  = 10<br>
+    third_place_base   = -10<br>
+    fourth_place_base  = -30
+  </code>
+</blockquote>
+
+<h5>4. Новый рейтинг места</h5>
+Это финальная формула. Единственное новое значение здесь - current_wind_rating, который представляет из себя рейтинг на текущий момент.
+<blockquote>
+  <code>
+    new_rating = adjustment * (base + (avg_table_rating - current_wind_rating) / 40)
+  </code>
+</blockquote>

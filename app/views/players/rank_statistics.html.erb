@@ -1,0 +1,7 @@
+<h3>Статистика изменения рейтинга</h3>
+<div style="background-color: #00c853; width: 400px; font-size: 8pt; padding: 1px; color: white;">0000.00.00 - 1500</div>
+
+  <% @ranks.each do |rank| %>
+  <% rnk = rank.rating_change - 1100 %>
+  <div style="background-color: #<%= color_rating(rank.rating_change)%>; width: <%= rnk %>px; font-size: 8pt; padding: 1px; color: white;"><%= rank.created_at.strftime("%Y.%m.%d") %> - <%= rank.rating_change %></div>
+<% end %>

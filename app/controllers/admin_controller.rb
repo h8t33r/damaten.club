@@ -6,4 +6,8 @@ class AdminController < ApplicationController
   def link_user_to_player
     
   end
+
+  def imports
+    
+  end
 end

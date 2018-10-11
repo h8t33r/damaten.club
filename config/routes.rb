@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :players
   
   get 'welcome' => 'welcome#index'
+  get 'ranking' => 'players#about_ranking'
+  get 'ranks/:id' => 'players#rank_statistics', as: 'ranks'
 
   get 'api/about'
   get 'api/players'
@@ -14,7 +16,8 @@ Rails.application.routes.draw do
 
   get 'admin/players' => 'players#admin_players'
   get 'admin/users' => 'admin#show_devise_users'
-  get 'admin/:id' => 'admin#link_user_to_player'
+  get 'admin/elo' => 'players#elo_rating'
+  get 'admin/imports' => 'admin#imports'
 
   root 'welcome#index'
 end

@@ -61,7 +61,9 @@
     <ul id="admin-dropdown" class="dropdown-content">
       <li><%= link_to "Players", admin_players_path %></li>
       <li><%= link_to "Users", admin_users_path %></li>
+      <li><%= link_to "Imports", admin_imports_path %></li>
       <li class="divider"></li>
+      <li><%= link_to "About Ranking", ranking_path %></li>
       <li><%= link_to "About API", api_about_path %></li>
     </ul>
   <% end %>
@@ -75,6 +77,10 @@
               <a href="<%= edit_user_registration_path %>">
                 <span class="white-text email"><%= current_user.email %></span>
               </a>
+            <% else %>
+              <a href="#">
+                <span class="white-text email">Гость</span>
+              </a>
             <% end %>
           </div>
       </li>    
@@ -86,7 +92,9 @@
         <% if current_user.email == "h2@damaten.club" %>
           <li><%= link_to "Players", admin_players_path %></li>
           <li><%= link_to "Users", admin_users_path %></li>
+          <li><%= link_to "Elo Ranking", admin_elo_path %></li>
           <li><%= link_to "About API", api_about_path %></li>
+          <li><%= link_to "Imports", admin_imports_path %></li>
           <li class="divider"></li>
         <% end %>
             <li><% link_to "Профиль: " + current_user.email, edit_user_registration_path %></li>
