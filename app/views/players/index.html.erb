@@ -41,7 +41,13 @@
         <td><%= link_to player.name, player %></td>
         <td><%= games_count %></td>
         <% if user_signed_in? and current_user.email == "h2@damaten.club" %>
-        <td> <!--<span style="color: #<%= color_rating(player.rank) %>">--><%= link_to player.rank, ranks_path(player.id) %><!--</span>--></td>
+        <td>
+          <% if player.games_count >= 25 %>
+          <%= link_to player.rank, ranks_path(player.id), :style => "color: #" + color_rating(player.rank) %>
+          <% else %>
+          &mdash;
+          <% end %>
+        </td>
         <% end %>
         <td><%= games_avg_place.round 1 %></td>
         <td><%= (100 / (games_count / p1.to_f)).round 1 %>%</td>
