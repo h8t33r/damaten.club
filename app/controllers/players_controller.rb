@@ -76,17 +76,29 @@ class PlayersController < ApplicationController
     games.each do |game|
       players_ranks = Hash.new
 
-      players = Player.select(:id, :name, :rank)
+      players = Player.select(:id, :name, :rank, :games_count)
 
       players_ranks['east_rank'] = players.find_by(:id => game.east_id).rank
+      players_ranks['east_games_count'] = players.find_by(:id => game.east_id).games_count
+
       players_ranks['south_rank'] = players.find_by(:id => game.south_id).rank
+      players_ranks['south_games_count'] = players.find_by(:id => game.south_id).games_count
+
       players_ranks['west_rank'] = players.find_by(:id => game.west_id).rank
+      players_ranks['west_games_count'] = players.find_by(:id => game.west_id).games_count
+
       players_ranks['north_rank'] = players.find_by(:id => game.north_id).rank
+      players_ranks['north_games_count'] = players.find_by(:id => game.north_id).games_count
 
       f = rating_change(game, players_ranks)
 
       players.update([game.east_id, game.south_id, game.west_id, game.north_id],
-        [{rank: f['east']}, {rank: f['south']}, {rank: f['west']}, {rank: f['north']}])
+        [
+          {rank: f['east'], games_count: f['east_games_count']},
+          {rank: f['south'], games_count: f['south_games_count']},
+          {rank: f['west'], games_count: f['west_games_count']},
+          {rank: f['north'], games_count: f['north_games_count']}
+        ])
 
       Rank.create(player_id: game.east_id, rating_change: f['east'], created_at: game.created_at)
       Rank.create(player_id: game.south_id, rating_change: f['south'], created_at: game.created_at)
@@ -127,11 +139,11 @@ class PlayersController < ApplicationController
     west_rating  = player['west_rank']
     north_rating = player['north_rank']
 
-    # temp games count
-    east_c  = 0
-    south_c = 0
-    west_c  = 0
-    north_c = 0
+    # games count
+    east_c  = player['east_games_count']
+    south_c = player['south_games_count']
+    west_c  = player['west_games_count']
+    north_c = player['north_games_count']
 
     # add scores in array
     score_array = [
@@ -150,26 +162,30 @@ class PlayersController < ApplicationController
     adjustment = adjustment_calc(east_c)
     place_base = place_base_calc(score_array, game.east_score)
     new_east_rating = adjustment * (place_base + (avg_table_rait - east_rating) / 40)
-
     rating_hash['east'] = (east_rating + new_east_rating).round 0
+    rating_hash['east_games_count'] = east_c + 1
 
     # для юга
     adjustment = adjustment_calc(south_c)
     place_base = place_base_calc(score_array, game.south_score)
     new_south_rating = adjustment * (place_base + (avg_table_rait - south_rating) / 40)
     rating_hash['south'] = (south_rating + new_south_rating).round 0
+    rating_hash['south_games_count'] =south_c + 1
+
 
     # для запада
     adjustment = adjustment_calc(west_c)
     place_base = place_base_calc(score_array, game.west_score)
     new_west_rating = adjustment * (place_base + (avg_table_rait - west_rating) / 40)
     rating_hash['west'] = (west_rating + new_west_rating).round 0
+    rating_hash['west_games_count'] = west_c + 1
 
     # для севера
     adjustment = adjustment_calc(north_c)
     place_base = place_base_calc(score_array, game.north_score)
     new_north_rating = adjustment * (place_base + (avg_table_rait - north_rating) / 40)
     rating_hash['north'] = (north_rating + new_north_rating).round 0
+    rating_hash['north_games_count'] = north_c + 1
 
     return rating_hash
   end
