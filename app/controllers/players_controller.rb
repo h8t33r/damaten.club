@@ -57,73 +57,63 @@ class PlayersController < ApplicationController
     Player.update_all("rank = 1500")
     Rank.delete_all
     
-    games_query = "SELECT id, created_at,
-      (SELECT name FROM players WHERE CAST (id AS TEXT) = games.score #>> '{east, player_id}') AS east_name,
-      (SELECT rank FROM players WHERE CAST (id AS TEXT) = games.score #>> '{east, player_id}') AS east_rating,
-      CAST ((games.score #>> '{east, player_id}') AS integer) AS east_id,
-      CAST ((games.score #>> '{east, player_score}') AS integer) AS east_score,
-      (SELECT COUNT(*)
-       FROM games as c_games
-       WHERE (c_games.score #>> '{east, player_id}' = games.score #>> '{east, player_id}'
-       OR c_games.score #>> '{south, player_id}' = games.score #>> '{east, player_id}'
-       OR c_games.score #>> '{west, player_id}' = games.score #>> '{east, player_id}'
-       OR c_games.score #>> '{north, player_id}' = games.score #>> '{east, player_id}')
-     AND c_games.created_at <= games.created_at
-      ) AS east_game_count,
-    
-      (SELECT name FROM players WHERE CAST (id AS TEXT) = games.score #>> '{south, player_id}') AS south_name,
-      (SELECT rank FROM players WHERE CAST (id AS TEXT) = games.score #>> '{south, player_id}') AS south_rating,
-      CAST ((games.score #>> '{south, player_id}') AS integer) AS south_id,
-      CAST ((games.score #>> '{south, player_score}') AS integer) AS south_score,
-      (SELECT COUNT(*)
-       FROM games as c_games
-       WHERE (c_games.score #>> '{east, player_id}' = games.score #>> '{south, player_id}'
-       OR c_games.score #>> '{south, player_id}' = games.score #>> '{south, player_id}'
-       OR c_games.score #>> '{west, player_id}' = games.score #>> '{south, player_id}'
-       OR c_games.score #>> '{north, player_id}' = games.score #>> '{south, player_id}')
-     AND c_games.created_at <= games.created_at
-      ) AS south_game_count,
-    
-      (SELECT name FROM players WHERE CAST (id AS TEXT) = games.score #>> '{west, player_id}') AS west_name,
-      (SELECT rank FROM players WHERE CAST (id AS TEXT) = games.score #>> '{west, player_id}') AS west_rating,
-      CAST ((games.score #>> '{west, player_id}') AS integer) AS west_id,
-      CAST ((games.score #>> '{west, player_score}') AS integer) AS west_score,
-      (SELECT COUNT(*)
-       FROM games as c_games
-       WHERE (c_games.score #>> '{east, player_id}' = games.score #>> '{west, player_id}'
-       OR c_games.score #>> '{south, player_id}' = games.score #>> '{west, player_id}'
-       OR c_games.score #>> '{west, player_id}' = games.score #>> '{west, player_id}'
-       OR c_games.score #>> '{north, player_id}' = games.score #>> '{west, player_id}')
-     AND c_games.created_at <= games.created_at
-      ) AS west_game_count,
-    
-      (SELECT name FROM players WHERE CAST (id AS TEXT) = games.score #>> '{north, player_id}') AS north_name,
-      (SELECT rank FROM players WHERE CAST (id AS TEXT) = games.score #>> '{north, player_id}') AS north_rating,
-      CAST ((games.score #>> '{north, player_id}') AS integer) AS north_id,
-      CAST ((games.score #>> '{north, player_score}') AS integer) AS north_score,
-      (SELECT COUNT(*)
-       FROM games as c_games
-       WHERE (c_games.score #>> '{east, player_id}' = games.score #>> '{north, player_id}'
-       OR c_games.score #>> '{south, player_id}' = games.score #>> '{north, player_id}'
-       OR c_games.score #>> '{west, player_id}' = games.score #>> '{north, player_id}'
-       OR c_games.score #>> '{north, player_id}' = games.score #>> '{north, player_id}')
-     AND c_games.created_at <= games.created_at
-      ) AS north_game_count
+    games_query = ["SELECT created_at,
+      (score #>> '{east, player_id}')::bigint AS east_id,
+      (score #>> '{east, player_score}')::integer AS east_score,
+      (score #>> '{south, player_id}')::bigint AS south_id,
+      (score #>> '{south, player_score}')::integer AS south_score,
+      (score #>> '{west, player_id}')::bigint AS west_id,
+      (score #>> '{west, player_score}')::integer AS west_score,
+      (score #>> '{north, player_id}')::bigint AS north_id,
+      (score #>> '{north, player_score}')::integer AS north_score
     FROM games
-    ORDER BY id ASC
-    LIMIT 1 OFFSET ?;"
+    ORDER BY id ASC;"]
 
-    start_offset = 0
-    games_count = Game.count
-    @result = []
+    players_query = ["SELECT id, name, rank, (SELECT COUNT (*)
+      FROM games
+      WHERE score #>> '{east, player_id}' = players.id::text
+       OR score #>> '{south, player_id}' = players.id::text
+       OR score #>> '{west, player_id}' = players.id::text
+       OR score #>> '{north, player_id}' = players.id::text) AS games
+      FROM players
+      ORDER BY rank DESC;"]
 
-    while start_offset <= games_count
-      games = Game.find_by_sql [games_query, start_offset]
-      games.each do |game|
-        @result << rating_change(game)
-      end
-      start_offset +=1
+    @result = Array.new
+
+    games = Game.find_by_sql(games_query)
+    #players = Player.select(:id, :name, :rank)
+
+    games.each do |game|
+      players_ranks = Hash.new
+
+      players = Player.select(:id, :name, :rank)
+
+      players_ranks['east_rank'] = players.find_by(:id => game.east_id).rank
+      players_ranks['south_rank'] = players.find_by(:id => game.south_id).rank
+      players_ranks['west_rank'] = players.find_by(:id => game.west_id).rank
+      players_ranks['north_rank'] = players.find_by(:id => game.north_id).rank
+
+      f = rating_change(game, players_ranks)
+
+
+      #players.find_by(:id => game.east_id).rank = f['east']
+      #players.find_by(:id => game.south_id).rank = f['south']
+      #players.find_by(:id => game.west_id).rank = f['west']
+      #players.find_by(:id => game.north_id).rank = f['north']
+
+      players.update([game.east_id, game.south_id, game.west_id, game.north_id],
+        [{rank: f['east']}, {rank: f['south']}, {rank: f['west']}, {rank: f['north']}])
+
+      Rank.create(player_id: game.east_id, rating_change: f['east'], created_at: game.created_at)
+      Rank.create(player_id: game.south_id, rating_change: f['south'], created_at: game.created_at)
+      Rank.create(player_id: game.west_id, rating_change: f['west'], created_at: game.created_at)
+      Rank.create(player_id: game.north_id, rating_change: f['north'], created_at: game.created_at)
+
+      @result << f
+
+      #@result << game.created_at.to_s + " --- " + game.east_score.to_s# + " --- " + players_ranks['east_rank'].to_s
     end
+      #players.save_all
   end
 
   def update
@@ -148,18 +138,18 @@ class PlayersController < ApplicationController
 
   private
 
-  def rating_change(game)
+  def rating_change(game, player)
     # ratings
-    east_rating  = game.east_rating
-    south_rating = game.south_rating
-    west_rating  = game.west_rating
-    north_rating = game.north_rating
+    east_rating  = player['east_rank']
+    south_rating = player['south_rank']
+    west_rating  = player['west_rank']
+    north_rating = player['north_rank']
 
     # temp games count
-    east_c  = game.east_game_count
-    south_c = game.south_game_count
-    west_c  = game.west_game_count
-    north_c = game.north_game_count
+    east_c  = 0
+    south_c = 0
+    west_c  = 0
+    north_c = 0
 
     # add scores in array
     score_array = [
@@ -178,57 +168,26 @@ class PlayersController < ApplicationController
     adjustment = adjustment_calc(east_c)
     place_base = place_base_calc(score_array, game.east_score)
     new_east_rating = adjustment * (place_base + (avg_table_rait - east_rating) / 40)
+
     rating_hash['east'] = (east_rating + new_east_rating).round 0
-    rating_hash['east_name'] = game.east_name
 
     # для юга
     adjustment = adjustment_calc(south_c)
     place_base = place_base_calc(score_array, game.south_score)
     new_south_rating = adjustment * (place_base + (avg_table_rait - south_rating) / 40)
     rating_hash['south'] = (south_rating + new_south_rating).round 0
-    rating_hash['south_name'] = game.south_name
 
     # для запада
     adjustment = adjustment_calc(west_c)
     place_base = place_base_calc(score_array, game.west_score)
     new_west_rating = adjustment * (place_base + (avg_table_rait - west_rating) / 40)
     rating_hash['west'] = (west_rating + new_west_rating).round 0
-    rating_hash['west_name'] = game.west_name
 
     # для севера
     adjustment = adjustment_calc(north_c)
     place_base = place_base_calc(score_array, game.north_score)
     new_north_rating = adjustment * (place_base + (avg_table_rait - north_rating) / 40)
     rating_hash['north'] = (north_rating + new_north_rating).round 0
-    rating_hash['north_name'] = game.north_name
-
-    #update
-    t_east_player = Player.find(game.east_id)
-    t_east_player.rank = rating_hash['east']
-    t_east_player.save
-
-    r = Rank.create(player_id: game.east_id, rating_change: rating_hash['east'], created_at: game.created_at)
-
-    t_south_player = Player.find(game.south_id)
-    t_south_player.rank = rating_hash['south']
-    t_south_player.save
-
-    r = Rank.create(player_id: game.south_id, rating_change: rating_hash['south'], created_at: game.created_at)
-
-    t_west_player = Player.find(game.west_id)
-    t_west_player.rank = rating_hash['west']
-    t_west_player.save
-
-    r = Rank.create(player_id: game.west_id, rating_change: rating_hash['west'], created_at: game.created_at)
-
-    t_north_player = Player.find(game.north_id)
-    t_north_player.rank = rating_hash['north']
-    t_north_player.save
-
-    r = Rank.create(player_id: game.north_id, rating_change: rating_hash['north'], created_at: game.created_at)
-
-    rating_hash['created_at'] = game.created_at.strftime("%Y.%m.%d")
-    rating_hash['game_id'] = game.id
 
     return rating_hash
   end
