@@ -28,7 +28,7 @@ class PlayersController < ApplicationController
   end
 
   def rank_statistics
-    @ranks = Rank.where(:player_id => params[:id])
+    @ranks = Rank.where(:player_id => params[:id]).order(:created_at)
   end
 
   def new
@@ -69,19 +69,9 @@ class PlayersController < ApplicationController
     FROM games
     ORDER BY id ASC;"]
 
-    players_query = ["SELECT id, name, rank, (SELECT COUNT (*)
-      FROM games
-      WHERE score #>> '{east, player_id}' = players.id::text
-       OR score #>> '{south, player_id}' = players.id::text
-       OR score #>> '{west, player_id}' = players.id::text
-       OR score #>> '{north, player_id}' = players.id::text) AS games
-      FROM players
-      ORDER BY rank DESC;"]
-
     @result = Array.new
 
     games = Game.find_by_sql(games_query)
-    #players = Player.select(:id, :name, :rank)
 
     games.each do |game|
       players_ranks = Hash.new
@@ -95,12 +85,6 @@ class PlayersController < ApplicationController
 
       f = rating_change(game, players_ranks)
 
-
-      #players.find_by(:id => game.east_id).rank = f['east']
-      #players.find_by(:id => game.south_id).rank = f['south']
-      #players.find_by(:id => game.west_id).rank = f['west']
-      #players.find_by(:id => game.north_id).rank = f['north']
-
       players.update([game.east_id, game.south_id, game.west_id, game.north_id],
         [{rank: f['east']}, {rank: f['south']}, {rank: f['west']}, {rank: f['north']}])
 
@@ -111,9 +95,7 @@ class PlayersController < ApplicationController
 
       @result << f
 
-      #@result << game.created_at.to_s + " --- " + game.east_score.to_s# + " --- " + players_ranks['east_rank'].to_s
     end
-      #players.save_all
   end
 
   def update
