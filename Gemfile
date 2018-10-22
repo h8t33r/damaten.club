@@ -20,6 +20,9 @@ gem 'unicorn', '~> 5.1.0'
 
 gem 'devise', '~> 4.2'
 
+# for activejob
+gem 'sidekiq', '~> 5.0', '>= 5.0.5'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end

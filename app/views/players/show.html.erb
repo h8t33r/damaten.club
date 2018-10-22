@@ -28,7 +28,9 @@
     <td>Вторых мест</td><td><%= p2 %> | <%= (100 / (games_count / p2.to_f)).round 2 %>%</td>
     <td>Третьих мест</td><td><%= p3 %> | <%= (100 / (games_count / p3.to_f)).round 2 %>%</td>
     <td>Четвертых мест</td><td><%= p4 %> | <%= (100 / (games_count / p4.to_f)).round 2 %>%</td>
-    <% if user_signed_in? and current_user.email == "h2@damaten.club" %><td>Рейтинг Эло</td><td><%= @player.rank%></td><% end %>
+    <% if user_signed_in? %>
+      <td>Рейтинг Эло</td><td><%= link_to @player.rank, ranks_path(@player.id) %></td>
+    <% end %>
     <td>Лучший результат</td><td><%= best_result.flatten.max %></td>
   </tr>
 </table>

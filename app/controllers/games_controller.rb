@@ -3,7 +3,8 @@ class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
 
   def index
-    @games = Game.order(created_at: :desc)
+    @year = params[:year]
+    @games = Game.order(created_at: :desc).where("EXTRACT(year FROM created_at) = ?", @year)
     @players = Player.select(:name)
   end
 

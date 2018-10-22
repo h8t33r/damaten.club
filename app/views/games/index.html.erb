@@ -1,14 +1,15 @@
+<h4>Результаты игр за <%= @year %> год</h4>
 <% if user_signed_in? %>
 <div class="row">
   <div class="col s4">
     <a class="waves-effect waves-light btn" href="/games/new">Добавить результат</a>
   </div>
-  <!--<div class="col s8">
-    <a class="waves-effect waves-light btn">2015</a>
-    <a class="waves-effect waves-light btn">2016</a>
-    <a class="waves-effect waves-light btn">2017</a>
-    <a class="waves-effect waves-light btn">2018</a>
-  </div>-->
+  <div class="col s8">
+    <%= link_to "2015", games_year_path("2015"), class: "waves-effect waves-light btn" %>
+    <%= link_to "2016", games_year_path("2016"), class: "waves-effect waves-light btn" %>
+    <%= link_to "2017", games_year_path("2017"), class: "waves-effect waves-light btn" %>
+    <%= link_to "2018", games_year_path("2018"), class: "waves-effect waves-light btn" %>
+  </div>
 </div>
 <% end %>
 <table class="striped result">

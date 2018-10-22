@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   
   resources :rules
   resources :games
+  get 'games/year/:year' => 'games#index', as: 'games/year'
+
   resources :players
   
   get 'welcome' => 'welcome#index'
@@ -18,6 +20,7 @@ Rails.application.routes.draw do
   get 'admin/users' => 'admin#show_devise_users'
   get 'admin/elo' => 'players#elo_rating'
   get 'admin/imports' => 'admin#imports'
+  get 'admin/test' => 'players#test'
 
   root 'welcome#index'
 end

@@ -1,4 +1,4 @@
-require_relative 'boot'
+quire_relative 'boot'
 
 require 'rails/all'
 
@@ -15,5 +15,8 @@ module Damaten
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    # activejob adapter
+    config.active_job.queue_adapter = :sidekiq
   end
 end
