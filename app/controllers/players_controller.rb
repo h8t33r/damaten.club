@@ -52,11 +52,9 @@ class PlayersController < ApplicationController
     end
   end
 
-
-
   def elo_rating
 
-    Player.update_all("rank = 1500", "games_count = 0")
+    Player.update_all("rank = 1500, games_count = 0")
     Rank.delete_all
     
     games_query = ["SELECT created_at,
