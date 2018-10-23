@@ -52,10 +52,7 @@ class PlayersController < ApplicationController
     end
   end
 
-  def test
-    f = RatingCalcWorker.perform_async('sanma', 'example')
-    render html: f
-  end
+
 
   def elo_rating
 

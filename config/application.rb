@@ -1,4 +1,4 @@
-quire_relative 'boot'
+#quire_relative 'boot'
 
 require 'rails/all'
 
@@ -17,6 +17,6 @@ module Damaten
     # the framework and any gems in your application.
 
     # activejob adapter
-    config.active_job.queue_adapter = :sidekiq
+    #config.active_job.queue_adapter = :sidekiq
   end
 end
