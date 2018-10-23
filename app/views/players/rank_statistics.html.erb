@@ -1,7 +1,38 @@
-<h3>Статистика изменения рейтинга</h3>
-<div style="background-color: #00c853; width: 400px; font-size: 8pt; padding: 1px; color: white;">0000.00.00 - 1500</div>
+<h3><%= @player.name %></h3>
+<p>График изменение рейтинга</p>
 
-  <% @ranks.each do |rank| %>
-  <% rnk = rank.rating_change - 1100 %>
-  <div style="background-color: #<%= color_rating(rank.rating_change)%>; width: <%= rnk %>px; font-size: 8pt; padding: 1px; color: white;"><%= rank.created_at.strftime("%Y.%m.%d") %> - <%= rank.rating_change %></div>
-<% end %>
+<canvas id="ratingStatistics" width="600" height="200"></canvas>
+<script>
+var ctx = document.getElementById("ratingStatistics");
+var ratingStatistics = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ["Стартовые очки",
+          <% @ranks.each do |rank| %>
+            "<%= rank.created_at.strftime("%Y.%m.%d") %>",
+          <% end %>
+        ],
+        datasets: [{
+            label: '<%= @player.name %>',
+            data: [1500,
+              <% @ranks.each do |rank| %>
+                <%= rank.rating_change %>,
+              <% end %>
+            ],
+            backgroundColor: 'rgba(0,164,164,0.3)',
+            borderColor: 'rgba(0,164,164,1)',
+            borderWidth: 1,
+            pointHitRadius: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:false
+                }
+            }]
+        }
+    }
+});
+</script>

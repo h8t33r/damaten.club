@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="/default.css" type="text/css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata" type="text/css">
 
+    <script src="/Chart.min.js"></script>
   </head>
 
   <body>
@@ -33,7 +34,6 @@
           <li><%= link_to "Результаты", games_year_path(Time.new.year) %></li>
         </ul>
         <ul id="nav-mobile" class="right teal darken-1">
-
           <% if notice %>
             <!--<i class="large material-icons">person_outline</i>-->
             <li class="notice green"><%= notice %></li>
@@ -59,12 +59,12 @@
     </nav>
   <% if user_signed_in? and current_user.email == "h2@damaten.club" %>
     <ul id="admin-dropdown" class="dropdown-content">
-      <li><%= link_to "Players", admin_players_path %></li>
-      <li><%= link_to "Users", admin_users_path %></li>
-      <li><%= link_to "Imports", admin_imports_path %></li>
+      <li><%= link_to "Игроки", admin_players_path %></li>
+      <li><%= link_to "Польщователи", admin_users_path %></li>
+      <li><%= link_to "Выгрузки", admin_imports_path %></li>
       <li class="divider"></li>
-      <li><%= link_to "About Ranking", ranking_path %></li>
-      <li><%= link_to "About API", api_about_path %></li>
+      <li><%= link_to "О рейтинге", ranking_path %></li>
+      <li><%= link_to "Об API", api_about_path %></li>
     </ul>
   <% end %>
 

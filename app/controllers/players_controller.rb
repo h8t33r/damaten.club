@@ -28,6 +28,7 @@ class PlayersController < ApplicationController
   end
 
   def rank_statistics
+    @player = Player.find(params[:id])
     @ranks = Rank.where(:player_id => params[:id]).order(:created_at)
   end
 
