@@ -1,7 +1,10 @@
+<h3>Игроки и статистика</h3>
 <% if user_signed_in? %>
 <div class="row">
-  <div class="col s4">
-    <a class="waves-effect waves-light btn" href="/players/new">Добавить игрока</a>
+  <div class="col s8">
+    <a class="btn waves-effect waves-light" href="/players/new">
+      <i class="material-icons left">person_add</i> Добавить игрока
+    </a>
   </div>
 </div>
 <% end %>
@@ -9,14 +12,13 @@
   <thead>
     <tr>
       <th>Фамилия Имя</th>
-      <th>Всего игр</th>
-      <% if user_signed_in? %><th>Рейтинг Эло<br>(<%= link_to "в разработке", ranking_path %>)</th><% end %>
+      <th>Игры</th>
+      <% if user_signed_in? %><th>Рейтинг<sub title="Beta version">β</sub></th><% end %>
       <th>Среднее место</th>
       <th>1 место</th>
       <th>2 место</th>
       <th>3 место</th>
       <th>4 место</th>
-      <th>Лучший результат</th>
     </tr>
   </thead>
 
@@ -54,7 +56,6 @@
         <td><%= (100 / (games_count / p2.to_f)).round 1 %>%</td>
         <td><%= (100 / (games_count / p3.to_f)).round 1 %>%</td>
         <td><%= (100 / (games_count / p4.to_f)).round 1 %>%</td>
-        <td><%= best_result.flatten.max %></td>
       </tr>
     <% end %>
   </tbody>

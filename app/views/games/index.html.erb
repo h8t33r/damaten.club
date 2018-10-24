@@ -1,25 +1,36 @@
 <h4>Результаты игр за <%= @year %> год</h4>
 <% if user_signed_in? %>
+
 <div class="row">
-  <div class="col s4">
-    <a class="waves-effect waves-light btn" href="/games/new">Добавить результат</a>
-  </div>
-  <div class="col s8">
-    <%= link_to "2015", games_year_path("2015"), class: "waves-effect waves-light btn" %>
-    <%= link_to "2016", games_year_path("2016"), class: "waves-effect waves-light btn" %>
-    <%= link_to "2017", games_year_path("2017"), class: "waves-effect waves-light btn" %>
-    <%= link_to "2018", games_year_path("2018"), class: "waves-effect waves-light btn" %>
+  <div class="col s12 m12">
+    <a class="btn waves-effect waves-light" href="/games/new">
+      <i class="material-icons left">add_circle_outline</i>Добавить результат
+    </a>
   </div>
 </div>
+
+<div class="row">
+  <div class="col s12 m12">
+    <%= link_to "2015", games_year_path("2015"), class: "btn waves-effect waves-light" %>
+    <%= link_to "2016", games_year_path("2016"), class: "btn waves-effect waves-light" %>
+    <%= link_to "2017", games_year_path("2017"), class: "btn waves-effect waves-light" %>
+    <%= link_to "2018", games_year_path("2018"), class: "btn waves-effect waves-light" %>
+  </div>
+</div>
+
 <% end %>
-<table class="striped result">
+<table class="striped result responsive-table">
   <thead>
     <tr>
       <th>Игр: <%= @games.count %></th>
-      <th colspan="2">Восток</th>
-      <th colspan="2">Юг</th>
-      <th colspan="2">Запад</th>
-      <th colspan="2">Север</th>
+      <th>Восток</th>
+      <th></th>
+      <th>Юг</th>
+      <th></th>
+      <th>Запад</th>
+      <th></th>
+      <th>Север</th>
+      <th></th>
       <th style="text-align: right;">Сумма</th>
     </tr>
   </thead>

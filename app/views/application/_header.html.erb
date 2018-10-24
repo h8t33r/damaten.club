@@ -3,12 +3,12 @@
   <head>
     <title>Damaten Ivanovo</title>
 
-    <meta property="og:title" content="Ивановский клуб Риичи маджонга - Даматен">
-    <meta property="og:image" content="http://damaten.club/materialize/images/ivanovo_damaten_for_social_vk.png">
+    <meta property="og:title" content="Ивановский клуб Риичи маджонга - Даматен" />
+    <meta property="og:image" content="http://damaten.club/materialize/images/ivanovo_damaten_for_social_vk.png" />
 
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="theme-color" content="#0D47A1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#212121" />
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -19,90 +19,121 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link rel="stylesheet" href="/materialize/css/materialize.css" type="text/css" media="screen,projection" />
     <link rel="stylesheet" href="/default.css" type="text/css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata" type="text/css" />
 
-    <script src="/Chart.min.js"></script>
+    <script src="/chart.min.js"></script>
   </head>
 
   <body>
     <nav class="grey darken-3">
       <a href="#!" data-target="mobile-nav" class="sidenav-trigger sidenav-tr"><i class="material-icons">menu</i></a>
+
       <div class="nav-wrapper grey darken-3 hide-on-med-and-down">
+
         <ul id="nav-mobile" class="left">
-          <li><a href="/">Главная</a></li>
-          <li><a href="/players">Игроки</a></li>
+          <li><%= link_to "Главная", root_path %></li>
+          <li><%= link_to "Игроки", players_path %></li>
           <li><%= link_to "Результаты", games_year_path(Time.new.year) %></li>
+          <li><%= link_to "Рейтинг", ranking_path %></li>
+          <li><%= link_to "API", api_about_path %></li>
         </ul>
+
         <ul id="nav-mobile" class="right teal darken-1">
+
           <% if notice %>
-            <!--<i class="large material-icons">person_outline</i>-->
-            <li class="notice green"><%= notice %></li>
+            <li class="notice green"><i class="material-icons left">message</i><%= notice %></li>
           <% end %>
+
           <% if alert %>
-            <!--<i class="large material-icons">error_outline</i>-->
-            <li class="alert red"><%= alert %></li>
+            <li class="alert red"><i class="material-icons left">warning</i><%= alert %></li>
           <% end %>
 
           <% if user_signed_in? %>
             <% if current_user.email == "h2@damaten.club" %>
-              <li><a class="dropdown-trigger" href="#!" data-target="admin-dropdown">Администрирование<i class="material-icons right">arrow_drop_down</i></a></li>
+              <li>
+                <a class="dropdown-trigger" href="#!" data-target="admin-dropdown">Администрирование
+                  <i class="material-icons right">arrow_drop_down</i>
+                </a>
+              </li>
             <% end %>
             <li class="notice teal lighten-2"><%= current_user.email %></li>
-            <li><%= link_to "Выйти", destroy_user_session_path, method: :delete %></li>
+            <li>
+              <%= link_to destroy_user_session_path, method: :delete do %>
+                <i class="material-icons left">exit_to_app</i>Выйти
+              <% end %>
+            </li>
           <% else %>
-            <!--<li><% link_to "Регистрация", new_user_registration_path %></li>-->
-            <li><%= link_to "Войти", new_user_session_path %></li>
+            <li>
+              <%= link_to new_user_session_path do %>
+                <i class="material-icons left">input</i>Войти
+              <% end %>
+            </li>
           <% end %>
-
         </ul>
       </div>
     </nav>
+
   <% if user_signed_in? and current_user.email == "h2@damaten.club" %>
     <ul id="admin-dropdown" class="dropdown-content">
       <li><%= link_to "Игроки", admin_players_path %></li>
-      <li><%= link_to "Польщователи", admin_users_path %></li>
-      <li><%= link_to "Выгрузки", admin_imports_path %></li>
-      <li class="divider"></li>
-      <li><%= link_to "О рейтинге", ranking_path %></li>
-      <li><%= link_to "Об API", api_about_path %></li>
+      <li><%= link_to "Аккаунты", admin_users_path %></li>
+      <li><%= link_to "Управление", admin_imports_path %></li>
     </ul>
   <% end %>
 
     <ul class="sidenav" id="mobile-nav">
-      <li><div class="user-view">
+      <li>
+        <div class="user-view">
             <div class="background">
               <img src="/materialize/images/ivanovo_damaten_for_social_vk.png" width="300px">
             </div>
+
             <% if user_signed_in? %>
+
               <a href="<%= edit_user_registration_path %>">
                 <span class="white-text email"><%= current_user.email %></span>
               </a>
+
             <% else %>
+
               <a href="#">
                 <span class="white-text email">Гость</span>
               </a>
+
             <% end %>
+
           </div>
-      </li>    
-      <li><a href="/">Главная</a></li>
-      <li><a href="/players">Игроки</a></li>
-      <li><a href="/games">Результаты</a></li>
+      </li>
+      <li><%= link_to "Главная", root_path %></li>
+      <li><%= link_to "Игроки", players_path %></li>
+      <li><%= link_to "Результаты", games_year_path(Time.new.year) %></li>
+      <li><%= link_to "Рейтинг", ranking_path %></li>
+      <li><%= link_to "API", api_about_path %></li>
       <li class="divider"></li>
+
       <% if user_signed_in? %>
         <% if current_user.email == "h2@damaten.club" %>
-          <li><%= link_to "Players", admin_players_path %></li>
-          <li><%= link_to "Users", admin_users_path %></li>
+
+          <li><%= link_to "Игроки", admin_players_path %></li>
+          <li><%= link_to "Аккаунты", admin_users_path %></li>
+          <li><%= link_to "Управление", admin_imports_path %></li>
           <li class="divider"></li>
-          <li><%= link_to "About Rating", ranking_path %></li>
-          <li><%= link_to "About API", api_about_path %></li>
-          <li class="divider"></li>
-          <li><%= link_to "Imports", admin_imports_path %></li>
-          <li class="divider"></li>
+
         <% end %>
-            <li><% link_to "Профиль: " + current_user.email, edit_user_registration_path %></li>
-            <li><%= link_to "Выйти", destroy_user_session_path, method: :delete %></li>
-          <% else %>
-            <!--<li><% link_to "Регистрация", new_user_registration_path %></li>-->
-            <li><%= link_to "Войти", new_user_session_path %></li>
+
+        <li>
+          <%= link_to destroy_user_session_path, method: :delete do %>
+            <i class="material-icons left">exit_to_app</i>Выйти
           <% end %>
+        </li>
+
+      <% else %>
+
+        <li>
+          <%= link_to new_user_session_path do %>
+            <i class="material-icons left">input</i>Войти
+          <% end %>
+        </li>
+        
+      <% end %>
     </ul>

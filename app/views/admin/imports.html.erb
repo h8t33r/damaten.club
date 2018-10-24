@@ -1,7 +1,9 @@
+<h3>Скрипты</h3>
 <% if user_signed_in? and current_user.email == "h2@damaten.club" %>
   <p>
-    <%= link_to "Выгрузить результаты из CSV", api_csv_path %>
-    <br>
-    <%= link_to "Пересчитать рейтинг", admin_elo_path %>
+    <%= link_to "Выгрузить результаты из CSV", api_csv_path, class: "btn waves-effect waves-light" %>
+  </p>
+  <p>
+    <%= link_to "Пересчитать рейтинг", admin_elo_path, class: "btn waves-effect waves-light" %>
   </p>
 <% end %>
