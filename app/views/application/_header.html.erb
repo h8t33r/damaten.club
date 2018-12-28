@@ -34,8 +34,6 @@
           <li><%= link_to "Главная", root_path %></li>
           <li><%= link_to "Игроки", players_path %></li>
           <li><%= link_to "Результаты", games_year_path(Time.new.year) %></li>
-          <li><%= link_to "Рейтинг", ranking_path %></li>
-          <li><%= link_to "API", api_about_path %></li>
         </ul>
 
         <ul id="nav-mobile" class="right teal darken-1">
@@ -107,8 +105,6 @@
       <li><%= link_to "Главная", root_path %></li>
       <li><%= link_to "Игроки", players_path %></li>
       <li><%= link_to "Результаты", games_year_path(Time.new.year) %></li>
-      <li><%= link_to "Рейтинг", ranking_path %></li>
-      <li><%= link_to "API", api_about_path %></li>
       <li class="divider"></li>
 
       <% if user_signed_in? %>

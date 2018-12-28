@@ -8,17 +8,28 @@
     </a>
   </div>
 </div>
+<% end %>
+
+<%
+  year_first = 2015
+  year_now = Time.now.year
+  year_count = year_now - year_first
+
+  year_array = Array.new
+  for i in 0..year_count
+    year_array << year_first
+    year_first += 1
+  end
+%>
 
 <div class="row">
   <div class="col s12 m12">
-    <%= link_to "2015", games_year_path("2015"), class: "btn waves-effect waves-light" %>
-    <%= link_to "2016", games_year_path("2016"), class: "btn waves-effect waves-light" %>
-    <%= link_to "2017", games_year_path("2017"), class: "btn waves-effect waves-light" %>
-    <%= link_to "2018", games_year_path("2018"), class: "btn waves-effect waves-light" %>
+  <% year_array.each do |year| %>
+    <%= link_to year, games_year_path(year), class: "btn waves-effect waves-light" %>
+  <% end %>
   </div>
 </div>
 
-<% end %>
 <table class="striped result responsive-table">
   <thead>
     <tr>

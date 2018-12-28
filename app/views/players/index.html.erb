@@ -44,7 +44,7 @@
         <td><%= games_count %></td>
         <% if user_signed_in? %>
         <td>
-          <% if player.games_count >= 25 %>
+          <% if player.games_count >= 5 %>
           <%= link_to player.rank, ranks_path(player.id), :style => "color: #" + color_rating(player.rank) %>
           <% else %>
           &mdash;
