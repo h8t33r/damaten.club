@@ -3,7 +3,15 @@ class WelcomeController < ApplicationController
     render "index"#, :layout => false
   end
 
-  def how_play_riichi
-    
+  def yaku
+    render html: "yaku"
+  end
+
+  def rulebook
+    render html: "rulebook"
+  end
+
+  def events
+    render html: "events"
   end
 end

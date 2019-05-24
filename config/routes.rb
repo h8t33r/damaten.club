@@ -1,13 +1,17 @@
 Rails.application.routes.draw do
   devise_for :users
-  
-  resources :rules
+
   resources :games
   get 'games/year/:year' => 'games#index', as: 'games/year'
 
   resources :players
-  
+
   get 'welcome' => 'welcome#index'
+  get 'yaku' => 'welcome#yaku'
+  get 'rulebook' => 'welcome#rulebook'
+  get 'events' => 'welcome#events'
+
+
   get 'ranking' => 'players#about_ranking'
   get 'ranks/:id' => 'players#rank_statistics', as: 'ranks'
 
@@ -16,11 +20,15 @@ Rails.application.routes.draw do
   get 'api/games'
   get 'api/csv' => 'api#csv_import'
 
-  get 'admin/players' => 'players#admin_players'
-  get 'admin/users' => 'admin#show_devise_users'
-  get 'admin/elo' => 'players#elo_rating'
-  get 'admin/imports' => 'admin#imports'
-  get 'admin/test' => 'players#test'
+  scope '/admin' do
+    resources :rules
+
+    get 'players' => 'players#admin_players'
+    get 'users' => 'admin#show_devise_users'
+    get 'imports' => 'admin#imports'
+    get 'test' => 'players#test'
+    get 'elo' => 'players#elo_rating'
+  end
 
   root 'welcome#index'
 end
