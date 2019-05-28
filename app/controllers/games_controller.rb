@@ -27,7 +27,8 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.save
-        format.html { redirect_to @game, notice: 'Game was successfully created.' }
+        elo_rating
+        format.html { redirect_to @game, notice: 'Результаты игры добавлены' }
         format.json { render :show, status: :created, location: @game }
       else
         format.html { render :new }
@@ -40,7 +41,7 @@ class GamesController < ApplicationController
   def update
     respond_to do |format|
       if @game.update(game_params)
-        format.html { redirect_to @game, notice: 'Game was successfully updated.' }
+        format.html { redirect_to @game, notice: 'Результаты игры обновлены' }
         format.json { render :show, status: :ok, location: @game }
       else
         format.html { render :edit }
@@ -60,13 +61,13 @@ class GamesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_game
-      @game = Game.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_game
+    @game = Game.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def game_params
-      params.require(:game).permit(:score => {})
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def game_params
+    params.require(:game).permit(:score => {})
+  end
 end

@@ -1,9 +1,13 @@
 <h3>Скрипты</h3>
 <% if user_signed_in? and current_user.email == "h2@damaten.club" %>
-  <p>
+  <!--<p>
+    Выгрузка данных из CSV старых игр.<br>
     <%= link_to "Выгрузить результаты из CSV", api_csv_path, class: "btn waves-effect waves-light" %>
+  </p>-->
+  <p>
+    <%= link_to "Пересчитать рейтинг (нормализация всего)", elo_recalc_path('all'), class: "btn waves-effect waves-light" %>
   </p>
   <p>
-    <%= link_to "Пересчитать рейтинг", elo_path, class: "btn waves-effect waves-light" %>
+    <%= link_to "Пересчитать рейтинг (только последний)", elo_recalc_path(1), class: "btn waves-effect waves-light" %>
   </p>
 <% end %>

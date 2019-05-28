@@ -27,7 +27,8 @@ Rails.application.routes.draw do
     get 'users' => 'admin#show_devise_users'
     get 'imports' => 'admin#imports'
     get 'test' => 'players#test'
-    get 'elo' => 'players#elo_rating'
+    # get 'elo' => 'players#elo_rating'
+    get 'elo/recalc/:last' => 'players#elo_rating', as: 'elo/recalc/'
   end
 
   root 'welcome#index'
