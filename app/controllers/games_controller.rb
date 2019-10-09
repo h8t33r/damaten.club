@@ -13,12 +13,12 @@ class GamesController < ApplicationController
   end
 
   def new
-    @players = Player.select(:id, :name).where(activated: true)
+    @players = Player.select(:id, :name).where(activated: true).order(rank: :desc)
     @game = Game.new
   end
 
   def edit
-    @players = Player.select(:id, :name).where(activated: true)
+    @players = Player.select(:id, :name).where(activated: true).order(games_count: :desc)
   end
 
   def create

@@ -3,7 +3,7 @@ class PlayersController < ApplicationController
   before_action :set_player, only: [:show, :edit, :update, :destroy, :rank_statistics]
 
   def index
-    @players = Player.order(rank: :desc)
+    @players = Player.order(rank: :desc).where('games_count >= 5')
     @games = Game.all
   end
 

@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   scope '/admin' do
     resources :rules
 
-    get 'players' => 'players#admin_players'
+    get 'admin_players' => 'players#admin_players'
     get 'users' => 'admin#show_devise_users'
     get 'imports' => 'admin#imports'
     get 'test' => 'players#test'
